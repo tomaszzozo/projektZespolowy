@@ -1,0 +1,15 @@
+version: '3'
+services:
+  database:
+    image: "postgres:latest"
+    container_name: "pz-db-container"
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=mysecretpassword
+    volumes:
+      - pz-db-data:/var/lib/postgresql/data
+
+volumes:
+  pz-db-data:
+    external: false
