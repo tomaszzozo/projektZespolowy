@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -21,6 +23,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 @AllArgsConstructor
 public class SecurityConfig {
     private final RsaKeyProperties rsaKeyProperties;
@@ -30,7 +33,11 @@ public class SecurityConfig {
         return new InMemoryUserDetailsManager(
                 User.withUsername("user")
                         .password("{noop}password")
-                        .authorities("read")
+                        .roles("EMPLOYEE")
+                        .build(),
+                User.withUsername("admin")
+                        .password("{noop}admin")
+                        .roles("ADMIN")
                         .build()
         );
     }
