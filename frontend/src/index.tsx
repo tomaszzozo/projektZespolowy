@@ -2,14 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import "bootstrap/dist/css/bootstrap.css";
 import StyledEngineProvider from "@mui/material/StyledEngineProvider";
-import './index.sass';
+import './index.scss';
 import reportWebVitals from './reportWebVitals';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import SignIn from "./components/SignIn/SignIn";
 
 const router = createBrowserRouter([
-    // { path: "/", element: <Home /> },
-    // { path: "/home", element: <Home /> },
-    // { path: "/signIn", element: <SignIn /> },
+    { path: "/signIn", element: <SignIn /> },
     // { path: "*", element: <PageNotFound /> },
 ]);
 
