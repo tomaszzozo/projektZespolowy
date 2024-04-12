@@ -18,7 +18,7 @@ export default function SignIn() {
     >
       <div
         className={
-          "d-flex align-items-center justify-content-center w-75 h-70 shadow-lg border-radius-20 bg-secondary " +
+          "d-flex align-items-center justify-content-center w-75 h-70 shadow-lg border-radius-20 bg-white " +
           styles.card
         }
       >

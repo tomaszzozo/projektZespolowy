@@ -1,10 +1,12 @@
+$color-darker-white: #FFF9EC;
 $color-white: #fffbf3;
-$color-black: #22211E;
+$color-black: #31302C;
 $color-primary: #2660a4;
-$color-secondary: #C0C0C0;
+$color-secondary: #b87333;
 
 body {
-  background-color: $color-white;
+  background-color: $color-darker-white;
+  padding: 0 !important
 }
 
 .fullscreenParent {
@@ -26,6 +28,10 @@ body {
 
 .h-90 {
   height: 90% !important;
+}
+
+.h-125 {
+  height: 125% !important;
 }
 
 .h-70 {
@@ -63,11 +69,45 @@ body {
   background-color: $color-secondary !important;
 }
 
-.avatar-bg-primary.MuiAvatar-root,.MuiButton-sizeLarge {
+.bg-primary {
+  background-color: $color-primary !important;
+}
+
+.avatar-bg-primary.MuiAvatar-root, .MuiButton-sizeLarge {
   background-color: $color-primary !important;
   color: $color-white !important;
 }
 
+.fab-primary.MuiFab-root {
+  background-color: $color-darker-white;
+  color: $color-primary;
+}
+
 .color-black {
   color: $color-black
+}
+
+.color-white {
+  color: $color-white
+}
+
+.color-darker-white {
+  color: $color-darker-white
+}
+
+.color-primary {
+  color: $color-primary;
+}
+
+.color-secondary {
+  color: $color-secondary;
+}
+
+.MuiDrawer-paper {
+  background-color: $color-darker-white;
+  border-radius: 0 20px 20px 0;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }

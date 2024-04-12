@@ -1,0 +1,38 @@
+$top-offset-hover: 2px;
+$top-offset-selected: 6px;
+
+.navigationAvatar {
+  position: relative;
+}
+
+.selectedNavigationAvatar {
+  position: relative;
+  top: $top-offset-selected
+}
+
+.navigationElement {
+}
+
+.navigationElement:hover .navigationAvatar {
+  top: $top-offset-hover;
+  animation-name: navigationItemHover;
+  animation-duration: 0.25s;
+}
+
+@keyframes navigationItemHover {
+  from {
+    top: 0
+  }
+  to {
+    top: $top-offset-hover
+  }
+}
+
+@keyframes navigationItemDeHover {
+  from {
+    top: $top-offset-hover
+  }
+  to {
+    top: 0
+  }
+}
