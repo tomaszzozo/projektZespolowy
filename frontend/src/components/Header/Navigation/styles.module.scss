@@ -16,7 +16,7 @@ $top-offset-selected: 6px;
 .navigationElement:hover .navigationAvatar {
   top: $top-offset-hover;
   animation-name: navigationItemHover;
-  animation-duration: 0.25s;
+  animation-duration: 50ms;
 }
 
 @keyframes navigationItemHover {

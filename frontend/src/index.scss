@@ -3,6 +3,7 @@ $color-white: #fffbf3;
 $color-black: #31302C;
 $color-primary: #2660a4;
 $color-secondary: #b87333;
+$color-error-red: #d32f2f;
 
 body {
   background-color: $color-darker-white;
@@ -85,6 +86,10 @@ body {
 
 .color-black {
   color: $color-black
+}
+
+.color-error-red {
+  color: $color-error-red !important
 }
 
 .color-white {
