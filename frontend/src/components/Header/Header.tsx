@@ -41,7 +41,7 @@ export default function Header(props: Props) {
   return (
     <header
       className={
-        "position-sticky top-0 container-fluid p-0 m-0 mb-5 bg-primary d-flex align-items-center " +
+        "position-sticky top-0 container-fluid p-0 bg-primary d-flex align-items-center " +
         styles.header
       }
     >

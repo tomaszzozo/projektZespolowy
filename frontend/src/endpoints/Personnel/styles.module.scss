@@ -1,0 +1,24 @@
+@import "../../index.scss";
+
+.tableContainer {
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.muiTableContainer {
+	max-height: 70dvh;
+}
+
+.tableHeaderCell {
+	font-weight: bold;
+	color: $color-darker-white;
+	background-color: $color-primary;
+}
+
+.searchButton {
+	min-width: 100px;
+}
+
+.searchBar {
+	max-width: 400px;
+}

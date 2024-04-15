@@ -1,118 +1,122 @@
-$color-darker-white: #FFF9EC;
+$color-darker-white: #fff9ec;
 $color-white: #fffbf3;
-$color-black: #31302C;
+$color-black: #31302c;
 $color-primary: #2660a4;
 $color-secondary: #b87333;
 $color-error-red: #d32f2f;
 
 body {
-  background-color: $color-darker-white;
-  padding: 0 !important
+	background-color: $color-darker-white;
+	padding: 0 !important;
 }
 
 .fullscreenParent {
-  width: 100dvw;
-  height: 100dvh;
-  max-width: 100dvw;
-  max-height: 100dvh;
-  min-width: 100dvw;
-  min-height: 100dvh;
+	width: 100dvw;
+	height: 100dvh;
+	max-width: 100dvw;
+	max-height: 100dvh;
+	min-width: 100dvw;
+	min-height: 100dvh;
 }
 
 .border-radius-20 {
-  border-radius: 20px;
+	border-radius: 20px;
 }
 
 .w-90 {
-  width: 90% !important;
+	width: 90% !important;
 }
 
 .h-90 {
-  height: 90% !important;
+	height: 90% !important;
 }
 
 .h-125 {
-  height: 125% !important;
+	height: 125% !important;
 }
 
 .h-70 {
-  height: 70% !important;
+	height: 70% !important;
 }
 
 .MuiButton-sizeLarge {
-  font-size: 1rem;
-  min-width: 140px;
-  min-height: 60px;
+	font-size: 1rem;
+	min-width: 140px;
+	min-height: 60px;
 }
 
 .MuiFormLabel-root {
-  color: $color-black
+	color: $color-black;
 }
 
 .MuiOutlinedInput-notchedOutline {
-  border-color: $color-black;
+	border-color: $color-black;
 }
 
-.MuiOutlinedInput-root.MuiFocused > fieldset {
-  border-color: $color-primary;
+.MuiOutlinedInput-root.Mui-focused fieldset {
+	border-color: $color-primary !important;
 }
 
-.MuiOutlinedInput-root.MuiFocused > .MuiFormLabel-root {
-  color: $color-primary;
-  font-weight: 400;
+.MuiFormLabel-root.Mui-focused {
+	color: $color-primary !important;
 }
 
 .bg-white {
-  background-color: $color-white !important;
+	background-color: $color-white !important;
 }
 
 .bg-secondary {
-  background-color: $color-secondary !important;
+	background-color: $color-secondary !important;
 }
 
 .bg-primary {
-  background-color: $color-primary !important;
+	background-color: $color-primary !important;
 }
 
-.avatar-bg-primary.MuiAvatar-root, .MuiButton-sizeLarge {
-  background-color: $color-primary !important;
-  color: $color-white !important;
+.avatar-bg-primary.MuiAvatar-root,
+.MuiButton-sizeLarge {
+	background-color: $color-primary !important;
+	color: $color-white !important;
 }
 
 .fab-primary.MuiFab-root {
-  background-color: $color-darker-white;
-  color: $color-primary;
+	background-color: $color-darker-white;
+	color: $color-primary;
 }
 
 .color-black {
-  color: $color-black
+	color: $color-black;
 }
 
 .color-error-red {
-  color: $color-error-red !important
+	color: $color-error-red !important;
 }
 
 .color-white {
-  color: $color-white
+	color: $color-white;
 }
 
 .color-darker-white {
-  color: $color-darker-white
+	color: $color-darker-white;
 }
 
 .color-primary {
-  color: $color-primary;
+	color: $color-primary;
 }
 
 .color-secondary {
-  color: $color-secondary;
+	color: $color-secondary;
 }
 
 .MuiDrawer-paper {
-  background-color: $color-darker-white;
-  border-radius: 0 20px 20px 0;
+	background-color: $color-darker-white;
+	border-radius: 0 20px 20px 0;
 }
 
 .cursor-pointer {
-  cursor: pointer;
+	cursor: pointer;
+}
+
+.MuiTableContainer-root {
+	border-radius: 5px;
 }

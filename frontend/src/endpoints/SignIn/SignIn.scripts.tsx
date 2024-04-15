@@ -14,12 +14,14 @@ export namespace SignInScripts {
     const data = new FormData(event.currentTarget);
     const email = data.get("email")!.toString().trim();
     const password = data.get("password")!.toString().trim();
+    let end = false;
 
     if (!EmailValidator.validate(email.trim())) {
       setEmailError("Nieprawidłowy email");
-      return;
+      end = true;
+    } else {
+      setEmailError("");
     }
-    setEmailError("");
 
     if (
       !/^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!@#$%^&*()])[a-zA-Z0-9!@#$%^&*()]{8,30}$/.test(
@@ -27,9 +29,14 @@ export namespace SignInScripts {
       )
     ) {
       setPasswordError("Nieprawidłowe hasło");
+      end = true;
+    } else {
+      setPasswordError("");
+    }
+
+    if (end) {
       return;
     }
-    setPasswordError("");
 
     navigate("/");
   };
