@@ -13,6 +13,7 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import styles from "./styles.module.scss";
 import { PersonnelScripts } from "./Personnel.scripts";
+import { useNavigate } from "react-router-dom";
 
 export type Person = {
 	id: number;
@@ -23,6 +24,7 @@ export type Person = {
 };
 
 export default function Personnel() {
+	const navigate = useNavigate();
 	const [searchFieldValue, setSearchFieldValue] = useState("");
 	const [fetchedData, setFetchedData] = useState<Person[]>([
 		{
@@ -126,9 +128,23 @@ export default function Personnel() {
 							<TableBody>
 								{fetchedData.map((obj) => (
 									<TableRow key={obj.id} hover role="button">
-										<TableCell>{`${obj.name} ${obj.surname}`}</TableCell>
-										<TableCell>{obj.email}</TableCell>
-										<TableCell>
+										<TableCell
+											onClick={() =>
+												PersonnelScripts.onRowClick(obj.id, navigate)
+											}
+										>{`${obj.name} ${obj.surname}`}</TableCell>
+										<TableCell
+											onClick={() =>
+												PersonnelScripts.onRowClick(obj.id, navigate)
+											}
+										>
+											{obj.email}
+										</TableCell>
+										<TableCell
+											onClick={() =>
+												PersonnelScripts.onRowClick(obj.id, navigate)
+											}
+										>
 											<div className="d-flex align-items-center">
 												{PersonnelScripts.getRoleIcon(obj.role)}
 												<div className="ms-1 color-black">

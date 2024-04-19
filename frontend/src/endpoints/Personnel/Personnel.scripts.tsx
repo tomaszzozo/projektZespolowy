@@ -3,6 +3,7 @@ import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import BugReportIcon from "@mui/icons-material/BugReport";
 import { Person } from "./Personnel";
+import { NavigateFunction } from "react-router-dom";
 
 export namespace PersonnelScripts {
 	export const getRole = (role: number) => {
@@ -18,6 +19,10 @@ export namespace PersonnelScripts {
 		else if (role === 2)
 			return <AdminPanelSettingsIcon className="color-black" />;
 		else return <BugReportIcon />;
+	};
+
+	export const onRowClick = (id: number, navigate: NavigateFunction) => {
+		navigate(`/personnel/employeeMenu?id=${id}`);
 	};
 
 	export const onSearchClick = (

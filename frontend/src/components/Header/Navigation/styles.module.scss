@@ -1,38 +1,42 @@
+@import "../../../index.scss";
+
 $top-offset-hover: 2px;
 $top-offset-selected: 6px;
 
 .navigationAvatar {
-  position: relative;
+	position: relative;
+	color: $color-darker-white;
 }
 
 .selectedNavigationAvatar {
-  position: relative;
-  top: $top-offset-selected
+	position: relative;
+	top: $top-offset-selected;
+	color: $color-darker-white;
 }
 
-.navigationElement {
-}
+// .navigationElement {
+// }
 
 .navigationElement:hover .navigationAvatar {
-  top: $top-offset-hover;
-  animation-name: navigationItemHover;
-  animation-duration: 50ms;
+	top: $top-offset-hover;
+	animation-name: navigationItemHover;
+	animation-duration: 50ms;
 }
 
 @keyframes navigationItemHover {
-  from {
-    top: 0
-  }
-  to {
-    top: $top-offset-hover
-  }
+	from {
+		top: 0;
+	}
+	to {
+		top: $top-offset-hover;
+	}
 }
 
 @keyframes navigationItemDeHover {
-  from {
-    top: $top-offset-hover
-  }
-  to {
-    top: 0
-  }
+	from {
+		top: $top-offset-hover;
+	}
+	to {
+		top: 0;
+	}
 }

@@ -1,0 +1,43 @@
+@import "../../../index.scss";
+
+.menuContainer {
+	height: 60dvh;
+}
+
+.menuOptionContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	height: 19dvh;
+	width: 75%;
+	max-width: 400px;
+	background-color: $color-primary;
+	border-radius: 10px;
+}
+
+.menuOptionContainer:hover {
+	box-shadow: 3px 3px 3px $color-secondary;
+}
+
+.menuHeader {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	height: 100px;
+	width: 100%;
+	font-size: 22px;
+}
+
+@media (min-width: 992px) {
+	.menuOptionContainer {
+		height: 25dvh;
+	}
+
+	.menuHeader {
+		margin-top: 80px;
+		margin-bottom: 20px;
+		font-size: 30px;
+	}
+}

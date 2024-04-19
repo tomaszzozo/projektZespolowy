@@ -11,57 +11,57 @@ import Navigation from "./Navigation/Navigation";
 export type SelectedPage = "reports" | "personnel" | "administration";
 
 interface Props {
-  selectedPage: SelectedPage;
+	selectedPage: SelectedPage;
 }
 
 export default function Header(props: Props) {
-  const [open, setOpen] = React.useState(false);
-  const navigationContent: {
-    label: string;
-    icon: ReactElement;
-    endpoint: SelectedPage;
-  }[] = [
-    {
-      label: "Raporty",
-      icon: <AssessmentIcon className={"color-darker-white"} />,
-      endpoint: "reports",
-    },
-    {
-      label: "Personel",
-      icon: <PersonSearchIcon className={"color-darker-white"} />,
-      endpoint: "personnel",
-    },
-    {
-      label: "Administracja",
-      icon: <AdminPanelSettingsIcon className={"color-darker-white"} />,
-      endpoint: "administration",
-    },
-  ];
+	const [open, setOpen] = React.useState(false);
+	const navigationContent: {
+		label: string;
+		icon: ReactElement;
+		endpoint: SelectedPage;
+	}[] = [
+		{
+			label: "Raporty",
+			icon: <AssessmentIcon />,
+			endpoint: "reports",
+		},
+		{
+			label: "Personel",
+			icon: <PersonSearchIcon />,
+			endpoint: "personnel",
+		},
+		{
+			label: "Administracja",
+			icon: <AdminPanelSettingsIcon />,
+			endpoint: "administration",
+		},
+	];
 
-  return (
-    <header
-      className={
-        "position-sticky top-0 container-fluid p-0 bg-primary d-flex align-items-center " +
-        styles.header
-      }
-    >
-      <Fab
-        className={"fab-primary mx-4 d-md-none"}
-        aria-label="menu"
-        onClick={() => setOpen(true)}
-        size={"small"}
-      >
-        <MenuIcon />
-      </Fab>
-      <SideMenu
-        openState={[open, setOpen]}
-        navigationContent={navigationContent}
-      />
-      <p className={"fs-4 my-0 mx-md-4 fw-bold color-white"}>EZ-HR</p>
-      <Navigation
-        navigationContent={navigationContent}
-        selected={props.selectedPage}
-      />
-    </header>
-  );
+	return (
+		<header
+			className={
+				"position-sticky top-0 container-fluid p-0 bg-primary d-flex align-items-center mb-4 mb-md-5 " +
+				styles.header
+			}
+		>
+			<Fab
+				className={"fab-primary mx-4 d-md-none"}
+				aria-label="menu"
+				onClick={() => setOpen(true)}
+				size={"small"}
+			>
+				<MenuIcon />
+			</Fab>
+			<SideMenu
+				openState={[open, setOpen]}
+				navigationContent={navigationContent}
+			/>
+			<p className={"fs-4 my-0 mx-md-4 fw-bold color-white"}>EZ-HR</p>
+			<Navigation
+				navigationContent={navigationContent}
+				selected={props.selectedPage}
+			/>
+		</header>
+	);
 }
