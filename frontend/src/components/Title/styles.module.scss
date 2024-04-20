@@ -1,0 +1,43 @@
+.menuHeader {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	height: 100px;
+	width: 100%;
+	font-size: 22px;
+	animation: fadeIn;
+	animation-timing-function: linear;
+	animation-duration: 0.2s;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		margin-top: 3px;
+	}
+	to {
+		opacity: 1;
+		margin-top: 0;
+	}
+}
+
+@media (min-width: 992px) {
+	.menuHeader {
+		margin-top: 80px;
+		margin-bottom: 20px;
+		font-size: 30px;
+	}
+
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+			margin-top: 83px;
+		}
+		to {
+			opacity: 1;
+			margin-top: 80px;
+		}
+	}
+}
+

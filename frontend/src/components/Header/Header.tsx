@@ -56,6 +56,7 @@ export default function Header(props: Props) {
 			<SideMenu
 				openState={[open, setOpen]}
 				navigationContent={navigationContent}
+				selected={props.selectedPage}
 			/>
 			<p className={"fs-4 my-0 mx-md-4 fw-bold color-white"}>EZ-HR</p>
 			<Navigation

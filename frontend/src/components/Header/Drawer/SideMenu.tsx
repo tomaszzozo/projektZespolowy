@@ -9,10 +9,12 @@ import {
 	Drawer,
 } from "@mui/material";
 import ListItemText from "@mui/material/ListItemText";
+import { SelectedPage } from "../Header";
 
 interface Props {
 	openState: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
 	navigationContent: { label: string; icon: JSX.Element; endpoint: string }[];
+	selected: SelectedPage;
 }
 
 export default function SideMenu(props: Props) {
@@ -34,7 +36,13 @@ export default function SideMenu(props: Props) {
 							onClick={() => navigate("/" + obj.endpoint)}
 						>
 							<ListItemButton>
-								<ListItemIcon className="color-primary">
+								<ListItemIcon
+									className={
+										props.selected === obj.endpoint
+											? "color-secondary"
+											: "color-primary"
+									}
+								>
 									{obj.icon}
 								</ListItemIcon>
 								<ListItemText primary={obj.label} className={"color-black"} />

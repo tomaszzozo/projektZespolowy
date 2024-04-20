@@ -1,0 +1,25 @@
+@import "../../../index.scss";
+
+.tableContainer {
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.tableHeaderCell {
+	font-weight: bold;
+	text-align: center;
+	color: $color-darker-white;
+	background-color: $color-primary;
+}
+
+.tableHeaderBorderRight {
+	border-right: solid 1px $color-darker-white;
+}
+
+.searchButton {
+	min-width: 100px;
+}
+
+.searchBar {
+	max-width: 400px;
+}
