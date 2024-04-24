@@ -1,20 +1,64 @@
-CREATE TABLE users (
-       id SERIAL PRIMARY KEY,
-       password VARCHAR(60) NOT NULL,
-       email VARCHAR(255) NOT NULL UNIQUE,
-       first_name VARCHAR(255) NOT NULL,
-       last_name VARCHAR(255) NOT NULL,
-       change_password BOOLEAN NOT NULL DEFAULT TRUE,
-       phone_number VARCHAR(20) NOT NULL UNIQUE,
-       role INTEGER NOT NULL DEFAULT 0
+CREATE TABLE users
+(
+    id              SERIAL PRIMARY KEY,
+    password        VARCHAR(60)  NOT NULL,
+    email           VARCHAR(255) NOT NULL UNIQUE,
+    first_name      VARCHAR(255) NOT NULL,
+    last_name       VARCHAR(255) NOT NULL,
+    change_password BOOLEAN DEFAULT true,
+    phone_number    VARCHAR(20)  NOT NULL UNIQUE,
+    role            INTEGER DEFAULT 0
 );
 
-INSERT INTO users (password, email, first_name, last_name, change_password, phone_number, role) VALUES
-    ('$2a$12$D4f1sEnP2sD9Fz7HcVzZaeJ7tkCjJf3xNp6pEABQK1TXu5BMO8O6i', 'user1@example.com', 'John', 'Doe', true, '1111111111', 0),
-    ('$2a$12$Kj3fsFN9kSD82fnCxDHrReATePjcS1yJLuHOBQotpB.xk3ZBnX9Hu', 'user2@example.com', 'Alice', 'Johnson', true, '2222222222', 1),
-    ('$2a$12$xeQWSEnpz9HrcCsDh22reuLHibPQceQyq.5gbzXuEZt.jCdQWm9zm', 'user3@example.com', 'Bob', 'Smith', true, '3333333333', 2),
-    ('$2a$12$yyxAT4npL3SDhQHHX1vhreufBIbwx2bVkq0xTPH.k7XIXubkxQ7Su', 'user4@example.com', 'Carol', 'Taylor', true, '4444444444', 3),
-    ('$2a$12$889rsnmpP1WR8AFjk89fewJgKihGT30BxPEhltQhFmYpYHpWvj9ui', 'user5@example.com', 'Dave', 'Wilson', true, '5555555555', 1);
+CREATE TABLE tokens
+(
+    id          SERIAL PRIMARY KEY,
+    token_body  VARCHAR(100) NOT NULL,
+    valid_until TIMESTAMP    NOT NULL,
+    token_type  INTEGER      NOT NULL CHECK (token_type IN (0, 1)),
+    user_id     INTEGER      NOT NULL REFERENCES users (id)
+);
 
-select *
-from users;
+CREATE TABLE days_off_per_year
+(
+    id            SERIAL PRIMARY KEY,
+    yearly_limit  INTEGER,
+    year_of_limit TIMESTAMP NOT NULL,
+    user_id       INTEGER   NOT NULL REFERENCES users (id)
+);
+
+CREATE TABLE monthly_reports
+(
+    id                           SERIAL PRIMARY KEY,
+    user_id                      INTEGER NOT NULL REFERENCES users (id),
+    month_of_report              DATE    NOT NULL,
+    settlement_date              DATE,
+    work_hours                   INTEGER,
+    hourly_rate                  DOUBLE PRECISION,
+    transfer                     DOUBLE PRECISION,
+    l4_days                      INTEGER,
+    l4_daily_rate                DOUBLE PRECISION,
+    days_off_per_year            INTEGER REFERENCES days_off_per_year (id),
+    days_taken                   INTEGER,
+    days_unpaid                  INTEGER,
+    days_on_demand               INTEGER,
+    days_occasional              INTEGER,
+    time_off_daily_rate          DOUBLE PRECISION,
+    overtime_hourly_rate         DOUBLE PRECISION,
+    overtime_hours               INTEGER,
+    extra_pay                    DOUBLE PRECISION,
+    cash_advance                 DOUBLE PRECISION,
+    loan                         DOUBLE PRECISION,
+    additional_costs             DOUBLE PRECISION,
+    additional_costs_description TEXT,
+    other_costs                  DOUBLE PRECISION,
+    other_costs_description      TEXT,
+    tax_26_years_old             DOUBLE PRECISION
+);
+
+CREATE TABLE comments
+(
+    id           SERIAL PRIMARY KEY,
+    report_id    INTEGER NOT NULL REFERENCES monthly_reports (id),
+    comment_body TEXT    NOT NULL
+);
