@@ -1,6 +1,11 @@
 package pl.pz.backend.backend;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 
+@Setter
+@Getter
 public class TokenInfo {
     private String token;
     private Integer userRole;
@@ -12,27 +17,4 @@ public class TokenInfo {
         this.expiresIn = expiresIn;
     }
 
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public Integer getUserRole() {
-        return userRole;
-    }
-
-    public void setUserRole(Integer userRole) {
-        this.userRole = userRole;
-    }
-
-    public LocalDateTime getExpiresIn() {
-        return expiresIn;
-    }
-
-    public void setExpiresIn(LocalDateTime expiresIn) {
-        this.expiresIn = expiresIn;
-    }
 }

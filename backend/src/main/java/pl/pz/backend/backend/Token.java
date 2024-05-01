@@ -1,8 +1,13 @@
 package pl.pz.backend.backend;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "tokens")
 public class Token {
@@ -22,43 +27,4 @@ public class Token {
     @Column(name = "user_id", nullable = false)
     private Integer userId;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getTokenBody() {
-        return tokenBody;
-    }
-
-    public void setTokenBody(String tokenBody) {
-        this.tokenBody = tokenBody;
-    }
-
-    public LocalDateTime getValidUntil() {
-        return validUntil;
-    }
-
-    public void setValidUntil(LocalDateTime validUntil) {
-        this.validUntil = validUntil;
-    }
-
-    public Integer getTokenType() {
-        return tokenType;
-    }
-
-    public void setTokenType(Integer tokenType) {
-        this.tokenType = tokenType;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
 }
