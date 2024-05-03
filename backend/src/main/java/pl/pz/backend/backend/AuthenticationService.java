@@ -4,6 +4,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -21,6 +22,7 @@ public class AuthenticationService {
     private User user;
 
     private TokenRepository tokenRepository;
+
 
 
     public TokenInfo authenticate(String email, String password) {
@@ -41,29 +43,53 @@ public class AuthenticationService {
     }
 
     private boolean userIsValid(String email, String password) {
-        // Wyszukiwanie użytkownika w bazie danych po adresie email.
         Optional<User> userOptional = userRepository.findByEmail(email);
 
-        // Sprawdzenie, czy użytkownik istnieje i czy hasło się zgadza.
         if (userOptional.isPresent()) {
             User user = userOptional.get();
-            // Tutaj powinieneś porównać hasło z zaszyfrowanym hasłem w bazie danych.
-            // Poniżej zakładamy, że hasła są przechowywane w postaci zaszyfrowanej i używamy metody do sprawdzenia hasła.
-            // Na przykład używając bcrypt (w rzeczywistych aplikacjach nie przechowujemy ani nie porównujemy haseł w postaci jawnej):
-            // if (passwordEncoder.matches(password, user.getPassword())) {
-            //     this.user = user;
-            //     return true;
-            // }
 
-            // Przykładowa prosta wersja, zakładając że hasła są przechowywane w postaci jawnej (niezalecane w produkcji):
             if (user.getPassword().equals(password)) {
-                this.user = user; // Przypisanie znalezionego użytkownika do zmiennej klasy, jeśli jest potrzebna gdzie indziej.
+                this.user = user;
                 return true;
             }
         }
 
-        // Jeśli nie znaleziono użytkownika lub hasło nie zgadza się, zwracamy false.
         return false;
     }
+
+//    ---
+
+    public TokenInfo validateToken(String token) throws InvalidTokenException {
+        if (token == null || token.length() != 100) {
+            throw new InvalidTokenException("Nieprawidłowy format tokenu");
+        }
+
+        Optional<Token> tokenOptional = tokenRepository.findByTokenBody(token);
+        if (!tokenOptional.isPresent()) {
+            throw new InvalidTokenException("Token nie znaleziony");
+        }
+
+        Token dbToken = tokenOptional.get();
+        if (dbToken.getValidUntil().isBefore(LocalDateTime.now())) {
+            tokenRepository.delete(dbToken);
+            throw new InvalidTokenException("Token przeterminowany");
+        }
+
+        User user = userRepository.findById(dbToken.getUserId()).orElseThrow(() -> new InvalidTokenException("Nie znaleziono użytkownika"));
+        String newToken = generateNewToken(user);
+        dbToken.setTokenBody(newToken);
+        dbToken.setValidUntil(LocalDateTime.now().plusHours(1)); // reset expiration
+        tokenRepository.save(dbToken);
+
+        return new TokenInfo(newToken, user.getRole(), dbToken.getValidUntil());
+    }
+
+
+    private String generateNewToken(User user) {
+        String rawToken = RandomStringUtils.random(86, true, true) + "R" + user.getRole() + "ID" + user.getId();
+        return rawToken + StringUtils.repeat('0', 100 - rawToken.length());
+    }
+
+
 
 }
