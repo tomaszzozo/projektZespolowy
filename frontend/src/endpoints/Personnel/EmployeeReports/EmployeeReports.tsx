@@ -1,138 +1,123 @@
 import Header from "../../../components/Header/Header";
-import PersonIcon from "@mui/icons-material/Person";
 import Title from "../../../components/Title/Title";
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./styles.module.scss";
-import {
-	Backdrop,
-	Box,
-	Button,
-	Fab,
-	InputAdornment,
-	SpeedDial,
-	SpeedDialAction,
-	SpeedDialIcon,
-	Tab,
-	Table,
-	TableBody,
-	TableCell,
-	TableContainer,
-	TableHead,
-	TableRow,
-	Tabs,
-	TextField,
-} from "@mui/material";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker/DatePicker";
 import dayjs, { Dayjs } from "dayjs";
-import LocalBarIcon from "@mui/icons-material/LocalBar";
-import SaveIcon from "@mui/icons-material/Save";
 import AssessmentIcon from "@mui/icons-material/Assessment";
-import { TabContext, TabList, TabPanel } from "@mui/lab";
+import EmployeeBottomNavigation from "../EmployeeBottomNavigation/EmployeeBottomNavigation";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { MobileDatePicker } from "@mui/x-date-pickers";
 
 export default function EmployeeReports() {
-	const [year, setYear] = useState<Dayjs>(dayjs(new Date()));
-	const [open, setOpen] = React.useState(false);
-	const handleOpen = () => setOpen(true);
-	const handleClose = () => setOpen(false);
+	const [queryParameters] = useSearchParams();
+	const navigate = useNavigate();
 
-	const actions = [
-		{ icon: <SaveIcon />, name: "Save" },
-		{ icon: <SaveIcon />, name: "Save" },
-		{ icon: <SaveIcon />, name: "Save" },
-		{ icon: <SaveIcon />, name: "Save" },
-		{ icon: <SaveIcon />, name: "Save" },
-	];
+	if (
+		queryParameters.get("id") === null ||
+		parseInt(queryParameters.get("id")!) <= 0
+	) {
+		console.error(`id ${queryParameters.get("id")} is incorrect`);
+		navigate("/personnel");
+	}
 
-	const tableHeaderGroups: { label: string; span: number }[] = [
-		{ label: "Akcje", span: 1 },
-		{ label: "Daty", span: 2 },
-		{ label: "Podstawa wypłaty", span: 4 },
-		{ label: "L4", span: 3 },
-		{ label: "Urlopy", span: 7 },
-		{ label: "Nadgodziny", span: 3 },
-		{ label: "Pozostałe", span: 8 },
-		{ label: "Uwagi", span: 3 },
-		{ label: "Sumy", span: 2 },
-	];
+	const id = parseInt(queryParameters.get("id")!);
 
-	const tableHeaders: { label: string; border?: boolean }[] = [
-		{ label: "Generuj raport", border: true },
-		{ label: "Miesiąc" },
-		{ label: "Data rozliczenia", border: true },
-		{ label: "Godziny" },
-		{ label: "Stawka" },
-		{ label: "Razem" },
-		{ label: "Przelano", border: true },
-		{ label: "Dni" },
-		{ label: "Dniówka" },
-		{ label: "Razem", border: true },
-		{ label: "Dni" },
-		{ label: "Pozostało (dni)" },
-		{ label: "Bezpłatny (dni)" },
-		{ label: "Na żądanie (dni)" },
-		{ label: "Okolicznościowy (dni)" },
-		{ label: "Dniówka" },
-		{ label: "Razem", border: true },
-		{ label: "Godziny" },
-		{ label: "Stawka" },
-		{ label: "Razem", border: true },
-		{ label: "Premia" },
-		{ label: "Zaliczka" },
-		{ label: "Pożyczka" },
-		{ label: "Koszty dodatkowe" },
-		{ label: "Koszty dodatkowe - opis" },
-		{ label: "Koszty inne" },
-		{ label: "Koszty inne - opis" },
-		{ label: "Podatek 25 r.ż.", border: true },
-		{ label: "Uwaga 1" },
-		{ label: "Uwaga 2" },
-		{ label: "Uwaga 3", border: true },
-		{ label: "Koszty" },
-		{ label: "Do wypłaty" },
-	];
+	const paramsIncorrect = () => {
+		const m = queryParameters.get("month");
+		const y = queryParameters.get("year");
+
+		return (
+			m === null ||
+			y === null ||
+			Number.isNaN(parseInt(m)) ||
+			Number.isNaN(parseInt(y)) ||
+			parseInt(m) <= 0 ||
+			parseInt(m) > 12 ||
+			parseInt(y) < 2020 ||
+			parseInt(y) > 2099
+		);
+	};
+
+	const m = paramsIncorrect()
+		? new Date().getMonth()
+		: parseInt(queryParameters.get("month")!);
+	const y = paramsIncorrect()
+		? new Date().getFullYear()
+		: parseInt(queryParameters.get("year")!);
+
+	const date = dayjs(new Date(y, m - 1, 1));
+
+	// const tableHeaderGroups: { label: string; span: number }[] = [
+	// 	{ label: "Akcje", span: 1 },
+	// 	{ label: "Daty", span: 2 },
+	// 	{ label: "Podstawa wypłaty", span: 4 },
+	// 	{ label: "L4", span: 3 },
+	// 	{ label: "Urlopy", span: 7 },
+	// 	{ label: "Nadgodziny", span: 3 },
+	// 	{ label: "Pozostałe", span: 8 },
+	// 	{ label: "Uwagi", span: 3 },
+	// 	{ label: "Sumy", span: 2 },
+	// ];
+
+	// const tableHeaders: { label: string; border?: boolean }[] = [
+	// 	{ label: "Generuj raport", border: true },
+	// 	{ label: "Miesiąc" },
+	// 	{ label: "Data rozliczenia", border: true },
+	// 	{ label: "Godziny" },
+	// 	{ label: "Stawka" },
+	// 	{ label: "Razem" },
+	// 	{ label: "Przelano", border: true },
+	// 	{ label: "Dni" },
+	// 	{ label: "Dniówka" },
+	// 	{ label: "Razem", border: true },
+	// 	{ label: "Dni" },
+	// 	{ label: "Pozostało (dni)" },
+	// 	{ label: "Bezpłatny (dni)" },
+	// 	{ label: "Na żądanie (dni)" },
+	// 	{ label: "Okolicznościowy (dni)" },
+	// 	{ label: "Dniówka" },
+	// 	{ label: "Razem", border: true },
+	// 	{ label: "Godziny" },
+	// 	{ label: "Stawka" },
+	// 	{ label: "Razem", border: true },
+	// 	{ label: "Premia" },
+	// 	{ label: "Zaliczka" },
+	// 	{ label: "Pożyczka" },
+	// 	{ label: "Koszty dodatkowe" },
+	// 	{ label: "Koszty dodatkowe - opis" },
+	// 	{ label: "Koszty inne" },
+	// 	{ label: "Koszty inne - opis" },
+	// 	{ label: "Podatek 25 r.ż.", border: true },
+	// 	{ label: "Uwaga 1" },
+	// 	{ label: "Uwaga 2" },
+	// 	{ label: "Uwaga 3", border: true },
+	// 	{ label: "Koszty" },
+	// 	{ label: "Do wypłaty" },
+	// ];
 
 	return (
 		<>
 			<Header selectedPage={"personnel"} />
 			<Title
-				label="Tomasz Wojtkiewicz"
-				icon={<PersonIcon className="color-darker-white" />}
+				label="Tomasz Wojtkiewicz: rozliczenia"
+				icon={<AssessmentIcon className="color-darker-white" />}
 			/>
 			<div className={"d-flex justify-content-center my-4"}>
-				<DatePicker
+				<MobileDatePicker
 					views={["year", "month"]}
 					label={"Miesiąc"}
-					value={year}
-					onChange={(newValue) => {
+					value={date}
+					onAccept={(newValue) => {
 						if (newValue !== null) {
-							setYear(newValue);
+							navigate(
+								`/personnel/report?id=${id}&year=${newValue.year()}&month=${newValue.month() + 1}`
+							);
 						}
 					}}
 					minDate={dayjs(new Date(2020, 1, 1))}
 				/>
 			</div>
-			<div className={styles.spacer} />
-			<Backdrop open={open} />
-			<footer className={styles.footerNavigation}>
-				<SpeedDial
-					ariaLabel="SpeedDial tooltip example"
-					sx={{ position: "absolute", bottom: 16, right: 16 }}
-					icon={<SpeedDialIcon />}
-					onClose={handleClose}
-					onOpen={handleOpen}
-					open={open}
-				>
-					{actions.map((action) => (
-						<SpeedDialAction
-							key={action.name}
-							icon={action.icon}
-							tooltipTitle={action.name}
-							tooltipOpen
-							onClick={handleClose}
-						/>
-					))}
-				</SpeedDial>
-			</footer>
+			<EmployeeBottomNavigation />
 
 			{/* <div className={"d-flex justify-content-center my-4"}>
         <TextField
