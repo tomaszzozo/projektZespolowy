@@ -4,6 +4,7 @@ import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import BugReportIcon from "@mui/icons-material/BugReport";
 import { Person } from "./Personnel";
 import { NavigateFunction } from "react-router-dom";
+import styles from "./styles.module.scss";
 
 export namespace PersonnelScripts {
 	export const getRole = (role: number) => {
@@ -14,15 +15,16 @@ export namespace PersonnelScripts {
 	};
 
 	export const getRoleIcon = (role: number) => {
-		if (role === 0) return <PersonIcon className="color-black" />;
-		else if (role === 1) return <ManageAccountsIcon className="color-black" />;
+		if (role === 0) return <PersonIcon className={styles.cardIcon} />;
+		else if (role === 1)
+			return <ManageAccountsIcon className={styles.cardIcon} />;
 		else if (role === 2)
-			return <AdminPanelSettingsIcon className="color-black" />;
-		else return <BugReportIcon />;
+			return <AdminPanelSettingsIcon className={styles.cardIcon} />;
+		else return <BugReportIcon className={styles.cardIcon} />;
 	};
 
 	export const onRowClick = (id: number, navigate: NavigateFunction) => {
-		navigate(`/personnel/employeeMenu?id=${id}`);
+		navigate(`/personnel/data?id=${id}`);
 	};
 
 	export const onSearchClick = (

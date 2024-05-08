@@ -4,15 +4,22 @@ import Title from "../../../components/Title/Title";
 import React, { useState } from "react";
 import styles from "./styles.module.scss";
 import {
+	Backdrop,
+	Box,
 	Button,
 	Fab,
 	InputAdornment,
+	SpeedDial,
+	SpeedDialAction,
+	SpeedDialIcon,
+	Tab,
 	Table,
 	TableBody,
 	TableCell,
 	TableContainer,
 	TableHead,
 	TableRow,
+	Tabs,
 	TextField,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker/DatePicker";
@@ -20,9 +27,21 @@ import dayjs, { Dayjs } from "dayjs";
 import LocalBarIcon from "@mui/icons-material/LocalBar";
 import SaveIcon from "@mui/icons-material/Save";
 import AssessmentIcon from "@mui/icons-material/Assessment";
+import { TabContext, TabList, TabPanel } from "@mui/lab";
 
 export default function EmployeeReports() {
 	const [year, setYear] = useState<Dayjs>(dayjs(new Date()));
+	const [open, setOpen] = React.useState(false);
+	const handleOpen = () => setOpen(true);
+	const handleClose = () => setOpen(false);
+
+	const actions = [
+		{ icon: <SaveIcon />, name: "Save" },
+		{ icon: <SaveIcon />, name: "Save" },
+		{ icon: <SaveIcon />, name: "Save" },
+		{ icon: <SaveIcon />, name: "Save" },
+		{ icon: <SaveIcon />, name: "Save" },
+	];
 
 	const tableHeaderGroups: { label: string; span: number }[] = [
 		{ label: "Akcje", span: 1 },
@@ -92,6 +111,29 @@ export default function EmployeeReports() {
 					minDate={dayjs(new Date(2020, 1, 1))}
 				/>
 			</div>
+			<div className={styles.spacer} />
+			<Backdrop open={open} />
+			<footer className={styles.footerNavigation}>
+				<SpeedDial
+					ariaLabel="SpeedDial tooltip example"
+					sx={{ position: "absolute", bottom: 16, right: 16 }}
+					icon={<SpeedDialIcon />}
+					onClose={handleClose}
+					onOpen={handleOpen}
+					open={open}
+				>
+					{actions.map((action) => (
+						<SpeedDialAction
+							key={action.name}
+							icon={action.icon}
+							tooltipTitle={action.name}
+							tooltipOpen
+							onClick={handleClose}
+						/>
+					))}
+				</SpeedDial>
+			</footer>
+
 			{/* <div className={"d-flex justify-content-center my-4"}>
         <TextField
           label="Roczny wymiar urlopu"

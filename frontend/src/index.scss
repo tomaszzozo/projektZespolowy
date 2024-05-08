@@ -158,3 +158,21 @@ button.MuiPickersYear-yearButton.Mui-selected {
 .MuiDialogContent-root {
 	background-color: $color-darker-white;
 }
+
+.MuiSpeedDial-fab {
+	background-color: $color-primary;
+}
+
+.MuiSpeedDialIcon-icon {
+	color: $color-darker-white;
+}
+
+.MuiSpeedDialAction-fab {
+	color: $color-primary;
+	background-color: $color-darker-white;
+}
+
+.MuiSpeedDialAction-staticTooltipLabel {
+	color: $color-primary;
+	background-color: $color-darker-white;
+}

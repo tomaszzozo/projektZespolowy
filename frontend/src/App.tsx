@@ -6,21 +6,17 @@ import SignIn from "./endpoints/SignIn/SignIn";
 import NotFound from "./endpoints/NotFound/NotFound";
 import Personnel from "./endpoints/Personnel/Personnel";
 import Administration from "./endpoints/Administration/Administration";
-import EmployeeMenu from "./endpoints/Personnel/EmployeeMenu/EmployeeMenu";
-import EmployeeReports from "./endpoints/Personnel/EmployeeReports/EmployeeReports";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { plPL } from "@mui/x-date-pickers/locales";
 import "dayjs/locale/pl";
+import EmployeeData from "./endpoints/Personnel/EmployeeData/EmployeeData";
 
 const router = createBrowserRouter([
-	{ path: "/", element: <Reports /> },
-	{ path: "/reports", element: <Reports /> },
+	{ path: "/", element: <Personnel /> },
 	{ path: "/signIn", element: <SignIn /> },
 	{ path: "/personnel", element: <Personnel /> },
-	{ path: "/administration", element: <Administration /> },
-	{ path: "/personnel/employeeMenu", element: <EmployeeMenu /> },
-	{ path: "/personnel/employeeReport", element: <EmployeeReports /> },
+	{ path: "/personnel/data", element: <EmployeeData /> },
 	{ path: "*", element: <NotFound /> },
 ]);
 

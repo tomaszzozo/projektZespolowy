@@ -22,3 +22,53 @@
 .searchBar {
 	max-width: 400px;
 }
+
+.cardsContainer {
+	margin-left: 20px;
+	margin-right: 20px;
+	overflow-y: scroll;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.cardContainer {
+	width: 80%;
+	min-height: 125px;
+	max-width: 400px;
+	background-color: $color-primary;
+	border-radius: 5px;
+	margin-bottom: 30px;
+	color: $color-darker-white;
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+.cardHeader {
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.cardMail {
+	margin: 10px 0 10px 0;
+	font-size: 14px;
+}
+
+.cardRole {
+	font-size: 12px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+.cardIcon {
+	color: $color-darker-white;
+	margin: 0 0 0 5px;
+
+	@media (min-width: 576px) {
+		color: $color-black;
+		margin: 0;
+	}
+}

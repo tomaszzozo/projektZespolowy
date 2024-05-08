@@ -51,7 +51,8 @@ export default function Personnel() {
 		{
 			id: 4,
 			name: "Jan",
-			surname: "Nowak",
+			surname:
+				"Nowak Nowakiewicz Nowakowski von Novakus aka Nowak Nowakiewicz Nowakowski von Novakus",
 			email: "jan@nowak.com",
 			role: 0,
 		},
@@ -83,7 +84,7 @@ export default function Personnel() {
 			<Header selectedPage={"personnel"} />
 			<div className={"container-fluid"}>
 				<div className={"row mb-4"}>
-					<div className="col d-flex justify-content-center align-items-center">
+					<div className="col d-flex flex-column flex-sm-row justify-content-center align-items-center">
 						<TextField
 							label="Wyszukaj pracownika"
 							value={searchFieldValue}
@@ -101,7 +102,8 @@ export default function Personnel() {
 							}
 							variant="outlined"
 							className={
-								"mx-2 bg-primary color-darker-white " + styles.searchButton
+								"mx-2 mt-3 mt-sm-0 bg-primary color-darker-white " +
+								styles.searchButton
 							}
 							startIcon={<SearchIcon />}
 						>
@@ -109,7 +111,7 @@ export default function Personnel() {
 						</Button>
 					</div>
 				</div>
-				<div className={styles.tableContainer}>
+				<div className={styles.tableContainer + " d-none d-sm-block"}>
 					<TableContainer className={styles.muiTableContainer}>
 						<Table stickyHeader>
 							<TableHead>
@@ -157,6 +159,24 @@ export default function Personnel() {
 							</TableBody>
 						</Table>
 					</TableContainer>
+				</div>
+				<div className={"d-sm-none " + styles.cardsContainer}>
+					{fetchedData.map((obj) => (
+						<div
+							key={obj.id}
+							className={styles.cardContainer}
+							onClick={() => PersonnelScripts.onRowClick(obj.id, navigate)}
+						>
+							<div
+								className={styles.cardHeader}
+							>{`${obj.name} ${obj.surname}`}</div>
+							<div className={styles.cardMail}>{obj.email}</div>
+							<div className={styles.cardRole}>
+								{PersonnelScripts.getRole(obj.role)}
+								{PersonnelScripts.getRoleIcon(obj.role)}
+							</div>
+						</div>
+					))}
 				</div>
 			</div>
 		</>
