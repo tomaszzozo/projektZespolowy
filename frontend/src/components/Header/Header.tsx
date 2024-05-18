@@ -21,21 +21,21 @@ export default function Header(props: Props) {
 		icon: ReactElement;
 		endpoint: SelectedPage;
 	}[] = [
-		{
-			label: "Raporty",
-			icon: <AssessmentIcon />,
-			endpoint: "reports",
-		},
+		// {
+		// 	label: "Raporty",
+		// 	icon: <AssessmentIcon />,
+		// 	endpoint: "reports",
+		// },
 		{
 			label: "Personel",
 			icon: <PersonSearchIcon />,
 			endpoint: "personnel",
 		},
-		{
-			label: "Administracja",
-			icon: <AdminPanelSettingsIcon />,
-			endpoint: "administration",
-		},
+		// {
+		// 	label: "Administracja",
+		// 	icon: <AdminPanelSettingsIcon />,
+		// 	endpoint: "administration",
+		// },
 	];
 
 	return (
@@ -58,7 +58,9 @@ export default function Header(props: Props) {
 				navigationContent={navigationContent}
 				selected={props.selectedPage}
 			/>
-			<p className={"fs-4 my-0 mx-md-4 fw-bold color-white"}>EZ-HR</p>
+			<a href="/">
+				<p className={"fs-4 my-0 mx-md-4 fw-bold color-white"}>EZ-HR</p>
+			</a>
 			<Navigation
 				navigationContent={navigationContent}
 				selected={props.selectedPage}
