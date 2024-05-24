@@ -2,7 +2,8 @@ $color-darker-white: #f9f7f2;
 $color-white: #fffdfa;
 $color-black: #31302c;
 $color-primary: #2660a4;
-$color-secondary: #ab6b2e;
+$color-secondary: #B87333;
+$color-secondary-hover: #d38139;
 $color-error-red: #d32f2f;
 
 body {
@@ -78,7 +79,7 @@ body {
 }
 
 .avatar-bg-primary.MuiAvatar-root,
-.MuiButton-sizeLarge {
+.MuiButton-sizeLarge,.MuiButton-containedSizeMedium {
 	background-color: $color-primary !important;
 	color: $color-white !important;
 }
@@ -94,6 +95,10 @@ body {
 
 .color-error-red {
 	color: $color-error-red !important;
+}
+
+.bg-error-red {
+	background-color: $color-error-red !important;
 }
 
 .color-white {
@@ -142,7 +147,7 @@ button.MuiPickersYear-yearButton {
 	color: $color-black;
 }
 
-button.MuiPickersYear-yearButton.Mui-selected {
+button.MuiPickersYear-yearButton.Mui-selected,button.MuiPickersDay-root.Mui-selected {
 	background-color: $color-primary;
 	color: $color-darker-white;
 }
@@ -160,7 +165,10 @@ button.MuiPickersYear-yearButton.Mui-selected {
 }
 
 .MuiSpeedDial-fab {
-	background-color: $color-primary;
+	background-color: $color-secondary;
+	&:hover {
+		background-color: $color-secondary-hover;
+	}
 }
 
 .MuiSpeedDialIcon-icon {
@@ -168,11 +176,15 @@ button.MuiPickersYear-yearButton.Mui-selected {
 }
 
 .MuiSpeedDialAction-fab {
-	color: $color-primary;
+	color: $color-secondary;
 	background-color: $color-darker-white;
 }
 
 .MuiSpeedDialAction-staticTooltipLabel {
-	color: $color-primary;
+	color: $color-secondary;
 	background-color: $color-darker-white;
+}
+
+.MuiTab-root.Mui-selected {
+	color: $color-primary;
 }

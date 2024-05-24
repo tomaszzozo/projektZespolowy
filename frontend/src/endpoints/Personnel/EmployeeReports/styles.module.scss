@@ -1,25 +1,43 @@
 @import "../../../index.scss";
 
-.searchButton {
-	min-width: 100px;
-}
-
-.searchBar {
-	max-width: 400px;
-}
-
-.footerNavigation {
-	height: 100px;
-	z-index: 5;
-	width: 100dvw;
-	position: fixed;
-	bottom: 0;
+.tabsContainer {
+	width: 100%;
 	display: flex;
 	justify-content: center;
-	align-items: center;
 }
 
-.spacer {
-	height: 100px;
-	width: 100dvw;
+.tabs {
+	max-width: 90%
 }
+
+.contentContainer {
+	width: 90dvw;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	margin: 0 5dvw 0 5dvw;
+	> {
+		* {
+			margin-top: 30px;
+		}
+		div[class*="MuiTextField-root"],button[class*="MuiButton-contained"] {
+			width: 194px;
+		}
+	}
+}
+
+.notesContainer {
+	display: flex;
+	align-items: center;
+
+	>*:not(:nth-child(1)) {
+		margin-left: 10px;
+	}
+
+	>button {
+		width: 30px;
+		height: 30px;
+		min-height: 0;
+	}
+}
+
