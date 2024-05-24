@@ -282,7 +282,9 @@ export default function EmployeeReports() {
         label="Tomasz Wojtkiewicz: rozliczenia"
         icon={<AssessmentIcon className="color-darker-white" />}
       />
-      <div className={"d-flex justify-content-center my-4"}>
+      <div
+        className={"d-flex justify-content-center my-4 " + styles.monthPicker}
+      >
         <MobileDatePicker
           views={["year", "month"]}
           label={"Miesiąc"}

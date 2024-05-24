@@ -9,8 +9,8 @@
 	width: 100%;
 	font-size: 22px;
 	animation: fadeIn;
-	animation-timing-function: linear;
-	animation-duration: 0.2s;
+	animation-duration: 1s;
+	animation-fill-mode: forwards;
 
 	@media (min-width: 992px) {
 		margin-top: 50px;
@@ -47,7 +47,7 @@
 	@keyframes fadeIn {
 		from {
 			opacity: 0;
-			margin-top: 83px;
+			margin-top: 90px;
 		}
 		to {
 			opacity: 1;
