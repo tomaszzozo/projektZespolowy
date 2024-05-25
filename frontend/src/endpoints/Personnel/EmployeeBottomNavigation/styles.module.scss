@@ -11,7 +11,8 @@
   animation: appear 500ms;
 
   &Hidden {
-    @extend button;
+    @extend .button;
+    animation: none;
     opacity: 0;
   }
 
@@ -21,12 +22,15 @@
 }
 
 .footer {
+  pointer-events: none;
   width: 100%;
   position: fixed;
   bottom: 0;
   height: 100px;
   padding: 0 20px;
   z-index: 10;
+  background: rgb(249,247,242);
+  background: linear-gradient(0deg, rgba(249,247,242,1) 0%, rgba(249,247,242,0) 50%);
 }
 
 .spacer {
