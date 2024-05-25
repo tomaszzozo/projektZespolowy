@@ -11,7 +11,10 @@ export default function EmployeeData() {
         label="Tomasz Wojtkiewicz: dane"
         icon={<PersonIcon className="color-darker-white" />}
       />
-      {/*<EmployeeBottomNavigation saveButtonActive={true} />*/}
+      <EmployeeBottomNavigation
+        saveButtonActive={false}
+        saveButtonOnClick={() => {}}
+      />
     </>
   );
 }
