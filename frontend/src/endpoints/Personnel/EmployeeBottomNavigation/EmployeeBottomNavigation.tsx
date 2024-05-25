@@ -5,13 +5,16 @@ import FabNavgiation, {
   Action,
 } from "../../../components/FabNavigation/FabNavigation";
 import { useNavigate } from "react-router-dom";
-import { Button, Fab } from "@mui/material";
+import { Fab } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 import styles from "./styles.module.scss";
 import React from "react";
 
 export default function EmployeeBottomNavigation(
-  props: Readonly<{ savedButtonActive: boolean }>,
+  props: Readonly<{
+    saveButtonActive: boolean;
+    saveButtonOnClick: Function;
+  }>,
 ) {
   const navigate = useNavigate();
 
@@ -45,8 +48,9 @@ export default function EmployeeBottomNavigation(
           color="primary"
           aria-label="save"
           className={
-            props.savedButtonActive ? styles.button : styles.buttonHidden
+            props.saveButtonActive ? styles.button : styles.buttonHidden
           }
+          onClick={() => props.saveButtonOnClick()}
         >
           <SaveIcon />
         </Fab>

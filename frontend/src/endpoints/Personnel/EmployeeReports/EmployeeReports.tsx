@@ -138,6 +138,7 @@ export default function EmployeeReports() {
     "dużo chce",
   ]);
   const [notes, setNotes] = useState<string[]>(savedNotes);
+  const [saveOverlay, setSaveOverlay] = useState(false);
   const [buttonActive, setButtonActive] = useState(false);
   useEffect(() => {
     setButtonActive(
@@ -596,7 +597,12 @@ export default function EmployeeReports() {
           </>
         )}
       </div>
-      <EmployeeBottomNavigation savedButtonActive={buttonActive} />
+      <EmployeeBottomNavigation
+        saveButtonActive={buttonActive}
+        saveButtonOnClick={() => {
+          setSaveOverlay(true);
+        }}
+      />
       {blocker.state === "blocked" && (
         <div className={styles.blockerContainer}>
           <div className={styles.blockerCard}>
@@ -618,6 +624,57 @@ export default function EmployeeReports() {
               onClick={() => blocker.proceed()}
             >
               Porzuć zmiany
+            </Button>
+          </div>
+        </div>
+      )}
+      {saveOverlay && (
+        <div className={styles.blockerContainer}>
+          <div className={styles.blockerCard}>
+            <p>Zapisać zmiany?</p>
+            <Button
+              variant="contained"
+              size={"large"}
+              onClick={() => setSaveOverlay(false)}
+            >
+              Nie zapisuj
+            </Button>
+            <Button
+              variant="contained"
+              size={"large"}
+              onClick={() => {
+                setSavedState({
+                  settlementDate:
+                    settlementDate === null ? null : settlementDate.toDate(),
+                  workHours: parseInt(workHours),
+                  hourlyRate: parseFloat(hourlyRate),
+                  transfer: parseFloat(transfer),
+                  l4Days: parseInt(l4Days),
+                  l4DailyRate: parseFloat(l4DailyRate),
+                  daysTaken: parseInt(daysTaken),
+                  daysUnpaid: parseInt(daysUnpaid),
+                  daysOnDemand: parseInt(daysOnDemand),
+                  daysOccasional: parseInt(daysOccasional),
+                  timeOffDailyRate: parseFloat(timeOffDailyRate),
+                  overtimeHourlyRate: parseFloat(overtimeHourlyRate),
+                  overtimeHours: parseInt(overtimeHours),
+                  extraPay: parseFloat(extraPay),
+                  cashAdvance: parseFloat(cashAdvance),
+                  loanTaken: parseFloat(loanTaken),
+                  loanReturned: parseFloat(loanReturned),
+                  additionalCosts: parseFloat(additionalCosts),
+                  additionalCostsDescription: additionalCostsDescription,
+                  otherCosts: parseFloat(otherCosts),
+                  otherCostsDescription: otherCostsDescription,
+                  tax26YearsOld: parseFloat(tax26YearsOld),
+                });
+                setSavedNotes([...notes]);
+                setSavedDaysToTake(parseInt(daysToTake));
+                setButtonActive(false);
+                setSaveOverlay(false);
+              }}
+            >
+              Zapisz
             </Button>
           </div>
         </div>
