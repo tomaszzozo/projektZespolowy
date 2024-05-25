@@ -194,6 +194,7 @@ export default function EmployeeReports() {
     notes,
     settlementDate,
   ]);
+  let blocker = useBlocker(buttonActive);
 
   if (
     queryParameters.get("id") === null ||
@@ -596,6 +597,31 @@ export default function EmployeeReports() {
         )}
       </div>
       <EmployeeBottomNavigation savedButtonActive={buttonActive} />
+      {blocker.state === "blocked" && (
+        <div className={styles.blockerContainer}>
+          <div className={styles.blockerCard}>
+            <p>
+              Zmiany <b>nie</b> zostały zapisane.
+              <br />
+              Porzucić zmiany?
+            </p>
+            <Button
+              variant="contained"
+              size={"large"}
+              onClick={() => blocker.reset()}
+            >
+              Wróć do edycji
+            </Button>
+            <Button
+              variant="contained"
+              size={"large"}
+              onClick={() => blocker.proceed()}
+            >
+              Porzuć zmiany
+            </Button>
+          </div>
+        </div>
+      )}
     </>
   );
 }

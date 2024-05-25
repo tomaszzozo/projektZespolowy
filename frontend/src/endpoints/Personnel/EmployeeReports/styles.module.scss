@@ -1,69 +1,126 @@
 @import "../../../index.scss";
 
 .tabsContainer {
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	animation-name: fadeIn;
-	animation-duration: 1s;
-	animation-fill-mode: backwards;
-	animation-delay: 0.5s;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  animation-fill-mode: backwards;
+  animation-delay: 0.5s;
 }
 
 .tabs {
-	max-width: 90%
+  max-width: 90%
 }
 
 .contentContainer {
-	width: 90dvw;
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-	margin: 0 5dvw 0 5dvw;
-	> {
-		* {
-			margin-top: 30px;
-		}
-		div[class*="MuiTextField-root"],button[class*="MuiButton-contained"] {
-			width: 194px;
-		}
-	}
+  width: 90dvw;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 5dvw 0 5dvw;
 
-	animation-name: fadeIn;
-	animation-duration: 1s;
-	animation-fill-mode: backwards;
-	animation-delay: 0.75s;
+  > {
+    * {
+      margin-top: 30px;
+    }
+
+    div[class*="MuiTextField-root"], button[class*="MuiButton-contained"] {
+      width: 194px;
+    }
+  }
+
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  animation-fill-mode: backwards;
+  animation-delay: 0.75s;
 }
 
 .notesContainer {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 
-	>*:not(:nth-child(1)) {
-		margin-left: 10px;
-	}
+  > *:not(:nth-child(1)) {
+    margin-left: 10px;
+  }
 
-	>button {
-		width: 30px;
-		height: 30px;
-		min-height: 0;
-	}
+  > button {
+    width: 30px;
+    height: 30px;
+    min-height: 0;
+  }
 }
 
 .monthPicker {
-	animation-name: fadeIn;
-	animation-duration: 1s;
-	animation-fill-mode: backwards;
-	animation-delay: 0.25s;
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  animation-fill-mode: backwards;
+  animation-delay: 0.25s;
+}
+
+.blockerContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100dvw;
+  height: 100dvh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  animation: opacityFadeIn 1s;
+  animation-fill-mode: backwards;
+}
+
+.blockerCard {
+  width: 80%;
+  max-width: 500px;
+  height: 50%;
+  max-height: 400px;
+  background-color: $color-darker-white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  animation: fadeIn 1s;
+  animation-fill-mode: backwards;
+
+  > button {
+    margin-top: 30px;
+    width: 195px;
+  }
+
+  > p {
+    font-size: 16px;
+    @media (min-width: 768px) {
+      font-size: 20px;
+    }
+  }
 }
 
 @keyframes fadeIn {
-	from {
-		opacity: 0;
-		margin-top: 5px
-	}
-	to {
-		opacity: 1;
-		margin-top: 0
-	}
+  from {
+    opacity: 0;
+    margin-top: 5px
+  }
+  to {
+    opacity: 1;
+    margin-top: 0
+  }
+}
+
+@keyframes opacityFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
