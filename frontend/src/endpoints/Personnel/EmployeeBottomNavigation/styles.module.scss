@@ -1,21 +1,55 @@
 @import "../../../index.scss";
 
-.fab {
-	z-index: 4;
-	color: $color-darker-white;
-	background-color: $color-primary;
-	height: 56px;
+.button {
+  height: 56px;
+  width: 56px;
+  position: absolute;
+  z-index:1050;
+  pointer-events: all;
+  right: 85px;
+  bottom: 16px;
+  color: $color-darker-white;
+  background-color: $color-secondary;
+  animation: appear 500ms;
+
+  &Hidden {
+    @extend .button;
+    animation: none;
+    opacity: 0;
+  }
+
+  &:hover {
+    background-color: $color-secondary-hover;
+  }
 }
 
-.fabContainer {
-	position: fixed;
-	bottom: 16px;
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+.footer {
+  pointer-events: none;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  height: 100px;
+  padding: 0 20px;
+  z-index: 10;
+  background: rgb(249,247,242);
+  background: linear-gradient(0deg, rgba(249,247,242,1) 0%, rgba(249,247,242,0) 100%);
+  @media (min-width: 768px) {
+    background: linear-gradient(0deg, rgba(249,247,242,1) 0%, rgba(249,247,242,0) 50%);
+  }
 }
 
-.fabIcon {
-	margin: 0 0 0 10px;
+.spacer {
+  width: 100%;
+  height: 100px;
+}
+
+@keyframes appear {
+  from {
+    right: 16px;
+    opacity: 0;
+  }
+  to {
+    right: 85px;
+    opacity: 1;
+  }
 }

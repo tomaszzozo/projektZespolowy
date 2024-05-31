@@ -3,6 +3,10 @@
 .tableContainer {
 	margin-left: 20px;
 	margin-right: 20px;
+	animation-name: fadeIn;
+	animation-duration: 1s;
+	animation-fill-mode: backwards;
+	animation-delay: 0.25s;
 }
 
 .muiTableContainer {
@@ -23,6 +27,12 @@
 	max-width: 400px;
 }
 
+.searchSection {
+	animation-name: fadeIn;
+	animation-duration: 1s;
+	animation-fill-mode: forwards;
+}
+
 .cardsContainer {
 	margin-left: 20px;
 	margin-right: 20px;
@@ -30,6 +40,10 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	animation-name: fadeIn;
+	animation-duration: 1s;
+	animation-fill-mode: forwards;
+	animation-delay: 0.25s;
 }
 
 .cardContainer {
@@ -70,5 +84,16 @@
 	@media (min-width: 576px) {
 		color: $color-black;
 		margin: 0;
+	}
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		margin-top: 5px
+	}
+	to {
+		opacity: 1;
+		margin-top: 0
 	}
 }
