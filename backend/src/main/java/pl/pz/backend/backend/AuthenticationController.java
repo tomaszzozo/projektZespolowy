@@ -15,7 +15,7 @@ public class AuthenticationController {
 
     private AuthenticationService authService;
 
-    public AuthenticationController(AuthenticationService authService, UserRepository userRepository) {
+    public AuthenticationController(AuthenticationService authService) {
         this.authService = authService;
     }
 
