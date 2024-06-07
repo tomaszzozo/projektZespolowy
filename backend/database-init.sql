@@ -1,3 +1,9 @@
+DROP TABLE IF EXISTS comments;
+DROP TABLE IF EXISTS monthly_reports;
+DROP TABLE IF EXISTS days_off_per_year;
+DROP TABLE IF EXISTS tokens;
+DROP TABLE IF EXISTS users;
+
 CREATE TABLE users
 (
     id              SERIAL PRIMARY KEY,
@@ -68,12 +74,10 @@ CREATE TABLE comments
 -- ## TESTOWE DANE ##
 
 
--- Login: admin123
--- User: user123
 INSERT INTO users (password, email, first_name, last_name, change_password, phone_number, role)
 VALUES
-    ('$2y$12$abcdefghijklmnopqrstuv', 'admin@example.com', 'Admin', 'User', false, '1234567890', 1), -- admin123
-    ('$2y$12$qrstuvabcdefghijklmnop', 'user@example.com', 'Regular', 'User', true, '0987654321', 0); -- user123
+    ('Admin123#', 'admin@example.com', 'Admin', 'User', false, '1234567890', 1),
+    ('User123#', 'user@example.com', 'Regular', 'User', true, '0987654321', 0);
 
 INSERT INTO days_off_per_year (yearly_limit, year_of_limit, user_id)
 VALUES (20, '2024-01-01', 2);

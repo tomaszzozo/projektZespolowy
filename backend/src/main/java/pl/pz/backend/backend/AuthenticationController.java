@@ -13,7 +13,7 @@ import java.time.temporal.ChronoUnit;
 @RequestMapping("/tokens/auth")
 public class AuthenticationController {
 
-    private AuthenticationService authService;
+    private final AuthenticationService authService;
 
     public AuthenticationController(AuthenticationService authService) {
         this.authService = authService;
@@ -32,7 +32,7 @@ public class AuthenticationController {
     private Cookie createHttpOnlyCookie(String token, LocalDateTime expiresIn) {
         Cookie cookie = new Cookie("auth_token", token);
         cookie.setHttpOnly(true);
-        cookie.setSecure(true);
+//        cookie.setSecure(true);
         cookie.setPath("/");
         cookie.setMaxAge((int) ChronoUnit.SECONDS.between(LocalDateTime.now(), expiresIn));
         return cookie;
