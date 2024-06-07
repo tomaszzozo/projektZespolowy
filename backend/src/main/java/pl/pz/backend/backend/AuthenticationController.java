@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 @RestController
+@CrossOrigin("http://localhost:3000")
 @RequestMapping("/tokens/auth")
 public class AuthenticationController {
 
