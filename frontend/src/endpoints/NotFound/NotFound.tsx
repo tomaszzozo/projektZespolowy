@@ -4,9 +4,12 @@ import { useEffect } from "react";
 
 export default function NotFound() {
   const navigate = useNavigate();
-  useEffect(() => {
-    window.setTimeout(() => navigate("/"), 10000);
-  }, []);
+  useEffect(
+    () => {
+      window.setTimeout(() => navigate("/signIn"), 5 * 1000);
+    },
+    [], // eslint-disable-line
+  );
 
   return (
     <div

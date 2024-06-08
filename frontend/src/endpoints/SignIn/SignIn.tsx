@@ -20,7 +20,7 @@ import * as EmailValidator from "email-validator";
 import { useCookies } from "react-cookie";
 
 export default function SignIn() {
-  const [cookie, setCookie] = useCookies(["role"]);
+  const [, setCookie] = useCookies(["role"]);
   const [showPassword, setShowPassword] = useState(false);
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -64,6 +64,7 @@ export default function SignIn() {
 
     fetch(
       `http://localhost:8080/tokens/auth/generate?email=${encodeURIComponent(email.trim())}&password=${encodeURIComponent(password)}`,
+      { credentials: "include" },
     )
       .then((response) => {
         if (!response.ok) {
@@ -182,8 +183,17 @@ export default function SignIn() {
           </div>
           <div className={"row m-0"}>
             <div className={"col d-flex justify-content-center"}>
-              <Button variant="contained" size={"large"} type={"submit"} disabled={waiting}>
-                {waiting ? <CircularProgress className={styles.progress}/> : "Zaloguj"}
+              <Button
+                variant="contained"
+                size={"large"}
+                type={"submit"}
+                disabled={waiting}
+              >
+                {waiting ? (
+                  <CircularProgress className={styles.progress} />
+                ) : (
+                  "Zaloguj"
+                )}
               </Button>
             </div>
           </div>

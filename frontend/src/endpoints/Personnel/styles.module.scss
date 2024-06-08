@@ -1,99 +1,107 @@
 @import "../../index.scss";
 
 .tableContainer {
-	margin-left: 20px;
-	margin-right: 20px;
-	animation-name: fadeIn;
-	animation-duration: 1s;
-	animation-fill-mode: backwards;
-	animation-delay: 0.25s;
+  margin-left: 20px;
+  margin-right: 20px;
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  animation-fill-mode: backwards;
+  animation-delay: 0.25s;
 }
 
 .muiTableContainer {
-	max-height: 70dvh;
+  max-height: 70dvh;
 }
 
 .tableHeaderCell {
-	font-weight: bold;
-	color: $color-darker-white;
-	background-color: $color-primary;
+  font-weight: bold;
+  color: $color-darker-white;
+  background-color: $color-primary;
 }
 
 .searchButton {
-	min-width: 100px;
+  min-width: 100px;
 }
 
 .searchBar {
-	max-width: 400px;
+  max-width: 400px;
 }
 
 .searchSection {
-	animation-name: fadeIn;
-	animation-duration: 1s;
-	animation-fill-mode: forwards;
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
 }
 
 .cardsContainer {
-	margin-left: 20px;
-	margin-right: 20px;
-	overflow-y: scroll;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	animation-name: fadeIn;
-	animation-duration: 1s;
-	animation-fill-mode: forwards;
-	animation-delay: 0.25s;
+  margin-left: 20px;
+  margin-right: 20px;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-delay: 0.25s;
 }
 
 .cardContainer {
-	width: 80%;
-	min-height: 125px;
-	max-width: 400px;
-	background-color: $color-primary;
-	border-radius: 5px;
-	margin-bottom: 30px;
-	color: $color-darker-white;
-	padding: 10px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
+  width: 80%;
+  min-height: 125px;
+  max-width: 400px;
+  background-color: $color-primary;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  color: $color-darker-white;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 .cardHeader {
-	font-weight: bold;
-	font-size: 18px;
+  font-weight: bold;
+  font-size: 18px;
 }
 
 .cardMail {
-	margin: 10px 0 10px 0;
-	font-size: 14px;
+  margin: 10px 0 10px 0;
+  font-size: 14px;
 }
 
 .cardRole {
-	font-size: 12px;
-	display: flex;
-	align-items: center;
-	justify-content: flex-end;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .cardIcon {
-	color: $color-darker-white;
-	margin: 0 0 0 5px;
+  color: $color-darker-white;
+  margin: 0 0 0 5px;
 
-	@media (min-width: 576px) {
-		color: $color-black;
-		margin: 0;
-	}
+  @media (min-width: 576px) {
+    color: $color-black;
+    margin: 0;
+  }
 }
 
 @keyframes fadeIn {
-	from {
-		opacity: 0;
-		margin-top: 5px
-	}
-	to {
-		opacity: 1;
-		margin-top: 0
-	}
+  from {
+    opacity: 0;
+    margin-top: 5px
+  }
+  to {
+    opacity: 1;
+    margin-top: 0
+  }
+}
+
+.progressContainer {
+  width: 100%;
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
