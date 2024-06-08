@@ -1,5 +1,5 @@
 import Header from "../../components/Header/Header";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Table,
@@ -14,6 +14,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import styles from "./styles.module.scss";
 import { PersonnelScripts } from "./Personnel.scripts";
 import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 export type Person = {
   id: number;
