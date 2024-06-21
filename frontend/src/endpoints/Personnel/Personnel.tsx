@@ -23,81 +23,50 @@ export type Person = {
   first_name: string;
   last_name: string;
   email: string;
-  phone_number:string;
+  phone_number: string;
   role: number;
 };
 
 export default function Personnel() {
-  useEffect(
-    () => {
-      validateToken(cookie, navigate, setCookie, setWaiting);
-    },
-    [], // eslint-disable-line
-  );
   const [waiting, setWaiting] = useState(true);
   const [cookie, setCookie] = useCookies(["role"]);
   const navigate = useNavigate();
   const [searchFieldValue, setSearchFieldValue] = useState("");
-  const [fetchedData, setFetchedData] = useState<Person[]>([
-    {
-      id: 1,
-      first_name: "Tester",
-      last_name: "Testiusz",
-      email: "tester@testing.com",
-      role: 0,
-      phone_number: "799799799",
-    },
-    {
-      id: 2,
-      first_name: "Adam",
-      last_name: "Testiusz",
-      email: "tester@testing.com",
-      role: 1,
-      phone_number: "799799799",
-    },
-    {
-      id: 3,
-      first_name: "Tester",
-      last_name: "Kowalski",
-      email: "tester@gmail.com",
-      role: 2,
-      phone_number: "799799799",
-    },
-    {
-      id: 4,
-      first_name: "Jan",
-      last_name:
-        "Nowak Nowakiewicz Nowakowski von Novakus aka Nowak Nowakiewicz Nowakowski von Novakus",
-      email: "jan@nowak.com",
-      role: 0,
-      phone_number: "799799799",
-    },
-    {
-      id: 5,
-      first_name: "Tester",
-      last_name: "Testiusz",
-      email: "tester@testing.com",
-      role: 0,
-      phone_number: "799799799",
-    },
-    {
-      id: 6,
-      first_name: "Tester",
-      phone_number: "799799799",
-      last_name: "Testiusz",
-      email: "tester@testing.com",
-      role: 0,
-    },
-    {
-      id: 7,
-      first_name: "Tester",
-      last_name: "Testiusz",
-      phone_number: "799799799",
-      email: "tester@testing.com",
-      role: 0,
-    },
-  ]);
+  const [fetchedData, setFetchedData] = useState<Person[]>([]);
   const [filteredData, setFilteredData] = useState<Person[]>(fetchedData);
+
+  useEffect(
+    () => {
+      new Promise<void>((resolve) => {
+        validateToken(cookie, navigate, setCookie, setWaiting);
+        setWaiting(true);
+        resolve();
+      }).then(() => {
+        fetch("http://localhost:8080/user", {
+          credentials: "include",
+        })
+          .then((response) => {
+            if (response.status !== 200) {
+              throw Error(
+                "Token logowania przedawnił się lub wystąpił błąd serwera.",
+              );
+            }
+            return response.text();
+          })
+          .then((text) => {
+            setFetchedData([...JSON.parse(text)]);
+            setFilteredData([...JSON.parse(text)]);
+            setWaiting(false);
+          })
+          .catch((error) => {
+            console.error(error);
+            navigate("/signIn");
+            return;
+          });
+      });
+    },
+    [], // eslint-disable-line
+  );
 
   if (waiting) {
     return <FullscreenProgress />;
@@ -191,7 +160,7 @@ export default function Personnel() {
           </TableContainer>
         </div>
         <div className={"d-sm-none " + styles.cardsContainer}>
-          {fetchedData.map((obj) => (
+          {filteredData.map((obj) => (
             <div
               key={obj.id}
               className={styles.cardContainer}
