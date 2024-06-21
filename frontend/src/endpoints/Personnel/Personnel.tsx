@@ -23,6 +23,7 @@ export type Person = {
   name: string;
   surname: string;
   email: string;
+  phoneNumber:string;
   role: number;
 };
 
@@ -44,6 +45,7 @@ export default function Personnel() {
       surname: "Testiusz",
       email: "tester@testing.com",
       role: 0,
+      phoneNumber: "799799799",
     },
     {
       id: 2,
@@ -51,6 +53,7 @@ export default function Personnel() {
       surname: "Testiusz",
       email: "tester@testing.com",
       role: 1,
+      phoneNumber: "799799799",
     },
     {
       id: 3,
@@ -58,6 +61,7 @@ export default function Personnel() {
       surname: "Kowalski",
       email: "tester@gmail.com",
       role: 2,
+      phoneNumber: "799799799",
     },
     {
       id: 4,
@@ -66,6 +70,7 @@ export default function Personnel() {
         "Nowak Nowakiewicz Nowakowski von Novakus aka Nowak Nowakiewicz Nowakowski von Novakus",
       email: "jan@nowak.com",
       role: 0,
+      phoneNumber: "799799799",
     },
     {
       id: 5,
@@ -73,10 +78,12 @@ export default function Personnel() {
       surname: "Testiusz",
       email: "tester@testing.com",
       role: 0,
+      phoneNumber: "799799799",
     },
     {
       id: 6,
       name: "Tester",
+      phoneNumber: "799799799",
       surname: "Testiusz",
       email: "tester@testing.com",
       role: 0,
@@ -85,6 +92,7 @@ export default function Personnel() {
       id: 7,
       name: "Tester",
       surname: "Testiusz",
+      phoneNumber: "799799799",
       email: "tester@testing.com",
       role: 0,
     },

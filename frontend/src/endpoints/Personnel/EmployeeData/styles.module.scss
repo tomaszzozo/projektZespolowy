@@ -1,1 +1,70 @@
 @import "../../../index.scss";
+
+.contentContainer {
+  width: 90dvw;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 5dvw 0 5dvw;
+
+  > {
+    * {
+      margin-top: 30px;
+    }
+
+    div[class*="MuiTextField-root"], button[class*="MuiButton-contained"] {
+      width: 194px;
+    }
+  }
+
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  animation-fill-mode: backwards;
+  animation-delay: 0.75s;
+}
+
+.blockerContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100dvw;
+  height: 100dvh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  animation: opacityFadeIn 0.5s;
+  animation-fill-mode: backwards;
+}
+
+.blockerCard {
+  width: 80%;
+  max-width: 500px;
+  height: 50%;
+  max-height: 400px;
+  background-color: $color-darker-white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  animation: fadeIn 0.5s;
+  animation-fill-mode: backwards;
+
+  > button {
+    margin-top: 30px;
+    width: 195px;
+  }
+
+  > p {
+    font-size: 16px;
+    @media (min-width: 768px) {
+      font-size: 20px;
+    }
+  }
+}

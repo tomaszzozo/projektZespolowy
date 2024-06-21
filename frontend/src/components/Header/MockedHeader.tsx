@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "./styles.module.scss";
+import MenuIcon from "@mui/icons-material/Menu";
+import {Fab} from "@mui/material";
 
 export default function MockedHeader () {
 
@@ -10,6 +12,13 @@ export default function MockedHeader () {
                 styles.header
             }
         >
+            <Fab
+                className={"fab-primary mx-4 opacity-0 d-md-none"}
+                onClick={() => {}}
+                size={"small"}
+            >
+                <MenuIcon />
+            </Fab>
             <a href="/">
                 <p className={"fs-4 my-0 mx-md-4 fw-bold color-white"}>EZ-HR</p>
             </a>
