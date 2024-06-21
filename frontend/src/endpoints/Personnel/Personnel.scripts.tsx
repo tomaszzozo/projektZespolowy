@@ -5,6 +5,7 @@ import BugReportIcon from "@mui/icons-material/BugReport";
 import { Person } from "./Personnel";
 import { NavigateFunction } from "react-router-dom";
 import styles from "./styles.module.scss";
+import React from "react";
 
 export namespace PersonnelScripts {
 	export const getRole = (role: number) => {
@@ -29,47 +30,61 @@ export namespace PersonnelScripts {
 
 	export const onSearchClick = (
 		searchFieldValue: string,
-		useStateFetchedData: [
-			Person[],
-			React.Dispatch<React.SetStateAction<Person[]>>,
-		]
+		fetchedData: Person[],
+		setFilteredData: React.Dispatch<React.SetStateAction<Person[]>>
 	) => {
-		const [fetchedData, setFetchedData] = useStateFetchedData;
-
 		if (searchFieldValue === "") {
-			setFetchedData([
+			setFilteredData([
 				...fetchedData.sort((p1, p2) => {
 					return p1.id - p2.id;
-				}),
-			]);
+				})
+			])
 		}
 
-		setFetchedData([
-			...fetchedData.sort((p1, p2) => {
-				const calculateSortingPoints = (p: Person): number => {
-					if (p.name.includes(searchFieldValue)) {
-						return 5;
-					} else if (p.email.includes(searchFieldValue)) {
-						return 4;
-					} else if (
-						p.name.toLowerCase().includes(searchFieldValue.toLowerCase())
-					) {
-						return 3;
-					} else if (
-						p.email.toLowerCase().includes(searchFieldValue.toLowerCase())
-					) {
-						return 2;
-					} else if (
-						getRole(p.role)
-							.toLowerCase()
-							.includes(searchFieldValue.toLowerCase())
-					) {
-						return 1;
-					}
-					return 0;
-				};
-				return calculateSortingPoints(p2) - calculateSortingPoints(p1);
-			}),
-		]);
+		const resultSet: Set<Person> = new Set();
+
+		fetchedData.forEach((p) => {
+			if (p.name.includes(searchFieldValue)) {
+				resultSet.add(p);
+			}
+		})
+		fetchedData.forEach((p) => {
+			if (p.surname.includes(searchFieldValue)) {
+				resultSet.add(p);
+			}
+		})
+		fetchedData.forEach((p) => {
+			if (p.email.includes(searchFieldValue)) {
+				resultSet.add(p);
+			}
+		})
+		fetchedData.forEach((p) => {
+			if (getRole(p.role).includes(searchFieldValue)) {
+				resultSet.add(p);
+			}
+		})
+
+		fetchedData.forEach((p) => {
+			if (p.name.toLowerCase().includes(searchFieldValue.toLowerCase())) {
+				resultSet.add(p);
+			}
+		})
+		fetchedData.forEach((p) => {
+			if (p.surname.toLowerCase().includes(searchFieldValue.toLowerCase())) {
+				resultSet.add(p);
+			}
+		})
+		fetchedData.forEach((p) => {
+			if (p.email.toLowerCase().includes(searchFieldValue.toLowerCase())) {
+				resultSet.add(p);
+			}
+		})
+		fetchedData.forEach((p) => {
+			if (getRole(p.role).toLowerCase().includes(searchFieldValue.toLowerCase())) {
+				resultSet.add(p);
+			}
+		})
+
+		setFilteredData(Array.from(resultSet));
 	};
 }

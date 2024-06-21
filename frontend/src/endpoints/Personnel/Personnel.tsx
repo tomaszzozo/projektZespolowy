@@ -89,6 +89,7 @@ export default function Personnel() {
       role: 0,
     },
   ]);
+  const [filteredData, setFilteredData] = useState<Person[]>(fetchedData);
 
   if (waiting) {
     return <FullscreenProgress />;
@@ -115,10 +116,11 @@ export default function Personnel() {
             />
             <Button
               onClick={() =>
-                PersonnelScripts.onSearchClick(searchFieldValue, [
+                PersonnelScripts.onSearchClick(
+                  searchFieldValue,
                   fetchedData,
-                  setFetchedData,
-                ])
+                  setFilteredData,
+                )
               }
               variant="outlined"
               className={
@@ -148,7 +150,7 @@ export default function Personnel() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {fetchedData.map((obj) => (
+                {filteredData.map((obj) => (
                   <TableRow key={obj.id} hover role="button">
                     <TableCell
                       onClick={() =>
