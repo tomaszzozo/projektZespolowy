@@ -2,6 +2,7 @@ package pl.pz.backend.backend;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,13 +13,9 @@ import java.time.temporal.ChronoUnit;
 @RestController
 @CrossOrigin(value = "http://localhost:3000", allowCredentials = "true")
 @RequestMapping("/tokens/auth")
+@AllArgsConstructor
 public class AuthenticationController {
-
     private final AuthenticationService authService;
-
-    public AuthenticationController(AuthenticationService authService) {
-        this.authService = authService;
-    }
 
     @GetMapping("/generate")
     public ResponseEntity<String> login(@RequestParam String email, @RequestParam String password, HttpServletResponse response) {
@@ -44,12 +41,12 @@ public class AuthenticationController {
     @GetMapping("/validate")
     public ResponseEntity<String> validateToken(@CookieValue("auth_token") String authToken) {
         try {
-            TokenInfo tokenInfo = authService.validateToken(authToken);
+            TokenInfo tokenInfo = authService.validateAndRegenToken(authToken);
             HttpHeaders headers = new HttpHeaders();
             headers.add("Set-Cookie", "auth_token=" + tokenInfo.getToken() + "; HttpOnly; Secure; Path=/; Max-Age=" + tokenInfo.getExpiresIn());
             return ResponseEntity.ok().headers(headers).body("Rola użytkownika: " + tokenInfo.getUserRole());
         } catch (InvalidTokenException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid or expired token");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
     }
 

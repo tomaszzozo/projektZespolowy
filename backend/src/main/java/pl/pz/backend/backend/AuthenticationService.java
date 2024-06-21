@@ -17,11 +17,11 @@ public class AuthenticationService {
         this.tokenRepository = tokenRepository;
     }
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     private User user;
 
-    private TokenRepository tokenRepository;
+    private final TokenRepository tokenRepository;
 
 
 
@@ -59,7 +59,7 @@ public class AuthenticationService {
 
 //    ---
 
-    public TokenInfo validateToken(String token) throws InvalidTokenException {
+    public TokenInfo validateAndRegenToken(String token) throws InvalidTokenException {
         if (token == null || token.length() != 100) {
             throw new InvalidTokenException("Nieprawidłowy format tokenu");
         }
@@ -82,6 +82,19 @@ public class AuthenticationService {
         tokenRepository.save(dbToken);
 
         return new TokenInfo(newToken, user.getRole(), dbToken.getValidUntil());
+    }
+
+    public void validateToken(String token) throws InvalidTokenException {
+        if (token == null || token.length() != 100) {
+            throw new InvalidTokenException("Nieprawidłowy format tokenu");
+        }
+        var tokenDb = tokenRepository.findByTokenBody(token).orElseThrow(() -> new InvalidTokenException("Token nie znaleziony"));
+
+        if (tokenDb.getValidUntil().isBefore(LocalDateTime.now())) {
+            tokenRepository.delete(tokenDb);
+            throw new InvalidTokenException("Token przeterminowany");
+        }
+        userRepository.findById(tokenDb.getUserId()).orElseThrow(() -> new InvalidTokenException("Nie znaleziono użytkownika"));
     }
 
 

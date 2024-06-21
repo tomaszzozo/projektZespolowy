@@ -1,6 +1,6 @@
 package pl.pz.backend.backend;
 
-public class InvalidTokenException extends RuntimeException {
+public class InvalidTokenException extends Exception {
     public InvalidTokenException(String message) {
         super(message);
     }
