@@ -44,12 +44,12 @@ export namespace PersonnelScripts {
 		const resultSet: Set<Person> = new Set();
 
 		fetchedData.forEach((p) => {
-			if (p.name.includes(searchFieldValue)) {
+			if (p.first_name.includes(searchFieldValue)) {
 				resultSet.add(p);
 			}
 		})
 		fetchedData.forEach((p) => {
-			if (p.surname.includes(searchFieldValue)) {
+			if (p.last_name.includes(searchFieldValue)) {
 				resultSet.add(p);
 			}
 		})
@@ -65,12 +65,12 @@ export namespace PersonnelScripts {
 		})
 
 		fetchedData.forEach((p) => {
-			if (p.name.toLowerCase().includes(searchFieldValue.toLowerCase())) {
+			if (p.first_name.toLowerCase().includes(searchFieldValue.toLowerCase())) {
 				resultSet.add(p);
 			}
 		})
 		fetchedData.forEach((p) => {
-			if (p.surname.toLowerCase().includes(searchFieldValue.toLowerCase())) {
+			if (p.last_name.toLowerCase().includes(searchFieldValue.toLowerCase())) {
 				resultSet.add(p);
 			}
 		})

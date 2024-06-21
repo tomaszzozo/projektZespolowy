@@ -20,10 +20,10 @@ import FullscreenProgress from "../../components/FullscreenProgress/FullscreenPr
 
 export type Person = {
   id: number;
-  name: string;
-  surname: string;
+  first_name: string;
+  last_name: string;
   email: string;
-  phoneNumber:string;
+  phone_number:string;
   role: number;
 };
 
@@ -41,58 +41,58 @@ export default function Personnel() {
   const [fetchedData, setFetchedData] = useState<Person[]>([
     {
       id: 1,
-      name: "Tester",
-      surname: "Testiusz",
+      first_name: "Tester",
+      last_name: "Testiusz",
       email: "tester@testing.com",
       role: 0,
-      phoneNumber: "799799799",
+      phone_number: "799799799",
     },
     {
       id: 2,
-      name: "Adam",
-      surname: "Testiusz",
+      first_name: "Adam",
+      last_name: "Testiusz",
       email: "tester@testing.com",
       role: 1,
-      phoneNumber: "799799799",
+      phone_number: "799799799",
     },
     {
       id: 3,
-      name: "Tester",
-      surname: "Kowalski",
+      first_name: "Tester",
+      last_name: "Kowalski",
       email: "tester@gmail.com",
       role: 2,
-      phoneNumber: "799799799",
+      phone_number: "799799799",
     },
     {
       id: 4,
-      name: "Jan",
-      surname:
+      first_name: "Jan",
+      last_name:
         "Nowak Nowakiewicz Nowakowski von Novakus aka Nowak Nowakiewicz Nowakowski von Novakus",
       email: "jan@nowak.com",
       role: 0,
-      phoneNumber: "799799799",
+      phone_number: "799799799",
     },
     {
       id: 5,
-      name: "Tester",
-      surname: "Testiusz",
+      first_name: "Tester",
+      last_name: "Testiusz",
       email: "tester@testing.com",
       role: 0,
-      phoneNumber: "799799799",
+      phone_number: "799799799",
     },
     {
       id: 6,
-      name: "Tester",
-      phoneNumber: "799799799",
-      surname: "Testiusz",
+      first_name: "Tester",
+      phone_number: "799799799",
+      last_name: "Testiusz",
       email: "tester@testing.com",
       role: 0,
     },
     {
       id: 7,
-      name: "Tester",
-      surname: "Testiusz",
-      phoneNumber: "799799799",
+      first_name: "Tester",
+      last_name: "Testiusz",
+      phone_number: "799799799",
       email: "tester@testing.com",
       role: 0,
     },
@@ -164,7 +164,7 @@ export default function Personnel() {
                       onClick={() =>
                         PersonnelScripts.onRowClick(obj.id, navigate)
                       }
-                    >{`${obj.name} ${obj.surname}`}</TableCell>
+                    >{`${obj.first_name} ${obj.last_name}`}</TableCell>
                     <TableCell
                       onClick={() =>
                         PersonnelScripts.onRowClick(obj.id, navigate)
@@ -199,7 +199,7 @@ export default function Personnel() {
             >
               <div
                 className={styles.cardHeader}
-              >{`${obj.name} ${obj.surname}`}</div>
+              >{`${obj.first_name} ${obj.last_name}`}</div>
               <div className={styles.cardMail}>{obj.email}</div>
               <div className={styles.cardRole}>
                 {PersonnelScripts.getRole(obj.role)}
