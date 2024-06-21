@@ -3,6 +3,8 @@ package pl.pz.backend.backend;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 class UserService {
@@ -20,5 +22,9 @@ class UserService {
         user.setLast_name(dto.last_name());
         user.setPhone_number(dto.phone_number());
         userRepository.save(user);
+    }
+
+    List<User.Dto> getAllUsers() {
+       return userRepository.findAll().stream().map(User::toDto).toList();
     }
 }
