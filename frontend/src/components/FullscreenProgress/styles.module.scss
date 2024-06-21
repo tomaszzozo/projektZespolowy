@@ -1,0 +1,9 @@
+@import "../../index.scss";
+
+.progressContainer {
+  width: 100%;
+  height: calc(100dvh - 70px - 48px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

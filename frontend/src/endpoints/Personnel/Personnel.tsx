@@ -2,7 +2,6 @@ import Header from "../../components/Header/Header";
 import React, { useEffect, useState } from "react";
 import {
   Button,
-  CircularProgress,
   Table,
   TableBody,
   TableCell,
@@ -16,6 +15,8 @@ import styles from "./styles.module.scss";
 import { PersonnelScripts } from "./Personnel.scripts";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import validateToken from "../../functions/ValidateToken";
+import FullscreenProgress from "../../components/FullscreenProgress/FullscreenProgress";
 
 export type Person = {
   id: number;
@@ -28,38 +29,7 @@ export type Person = {
 export default function Personnel() {
   useEffect(
     () => {
-      if (cookie.role !== 1) {
-        navigate("/unauthorized");
-        return;
-      }
-
-      fetch("http://localhost:8080/tokens/auth/validate", {
-        credentials: "include",
-      })
-        .then((response) => {
-          if (response.status !== 200) {
-            throw Error(
-              "Token logowania przedawnił się lub wystąpił błąd serwera.",
-            );
-          }
-          return response.text();
-        })
-        .then((text) => {
-          const match = text.match(/\d$/);
-          if (match === null) {
-            throw Error("Serwer nie podał roli użytkownika w odpowiedzi.");
-          } else if (parseInt(match[0]) !== 1) {
-            setCookie("role", 0);
-            navigate("/unauthorized");
-            return;
-          }
-          setCookie("role", parseInt(match[0]));
-          setWaiting(false);
-        })
-        .catch((error) => {
-          console.error(error);
-          navigate("/signIn");
-        });
+      validateToken(cookie, navigate, setCookie, setWaiting);
     },
     [], // eslint-disable-line
   );
@@ -121,11 +91,7 @@ export default function Personnel() {
   ]);
 
   if (waiting) {
-    return (
-      <div className={styles.progressContainer}>
-        <CircularProgress />
-      </div>
-    );
+    return <FullscreenProgress />;
   }
 
   return (

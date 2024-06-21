@@ -20,6 +20,9 @@ import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import BorderAllIcon from "@mui/icons-material/BorderAll";
 import RemoveIcon from "@mui/icons-material/Remove";
 import ClearIcon from "@mui/icons-material/Clear";
+import { useCookies } from "react-cookie";
+import FullscreenProgress from "../../../components/FullscreenProgress/FullscreenProgress";
+import validateToken from "../../../functions/ValidateToken";
 
 interface Report {
   settlementDate: Date | null;
@@ -140,6 +143,15 @@ export default function EmployeeReports() {
   const [notes, setNotes] = useState<string[]>(savedNotes);
   const [saveOverlay, setSaveOverlay] = useState(false);
   const [buttonActive, setButtonActive] = useState(false);
+  const [waiting, setWaiting] = useState(true);
+  const [cookie, setCookie] = useCookies(["role"]);
+  useEffect(
+    () => {
+      validateToken(cookie, navigate, setCookie, setWaiting);
+    },
+    [], // eslint-disable-line
+  );
+
   useEffect(() => {
     setButtonActive(
       detectStateChange(savedState.workHours, workHours) ||
@@ -195,6 +207,7 @@ export default function EmployeeReports() {
     notes,
     settlementDate,
   ]);
+
   let blocker = useBlocker(buttonActive);
 
   if (
@@ -276,6 +289,10 @@ export default function EmployeeReports() {
       parseFloat(cashAdvance)
     ).toFixed(2);
   };
+
+  if (waiting) {
+    return <FullscreenProgress />;
+  }
 
   return (
     <>

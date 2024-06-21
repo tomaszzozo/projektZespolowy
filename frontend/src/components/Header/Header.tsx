@@ -4,8 +4,6 @@ import { Fab } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SideMenu from "./Drawer/SideMenu";
 import PersonSearchIcon from "@mui/icons-material/PersonSearch";
-import AssessmentIcon from "@mui/icons-material/Assessment";
-import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import Navigation from "./Navigation/Navigation";
 
 export type SelectedPage = "reports" | "personnel" | "administration";
