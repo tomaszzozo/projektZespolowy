@@ -46,7 +46,7 @@ interface Report {
   additionalCostsDescription: string;
   otherCosts: number;
   otherCostsDescription: string;
-  tax26YearsOld: number;
+  tax26yearsOld: number;
 }
 
 export default function EmployeeReports() {
@@ -74,7 +74,7 @@ export default function EmployeeReports() {
     additionalCostsDescription: "",
     otherCosts: 0,
     otherCostsDescription: "",
-    tax26YearsOld: 0,
+    tax26yearsOld: 0,
   });
   const [extraPay, setExtraPay] = useState(savedState.extraPay.toString());
   const [cashAdvance, setCashAdvance] = useState(
@@ -97,7 +97,7 @@ export default function EmployeeReports() {
     savedState.otherCostsDescription.toString(),
   );
   const [tax26YearsOld, setTax26YearsOld] = useState(
-    savedState.tax26YearsOld.toString(),
+    savedState.tax26yearsOld.toString(),
   );
   const [workHours, setWorkHours] = useState(savedState.workHours.toString());
   const [hourlyRate, setHourlyRate] = useState(
@@ -147,12 +147,83 @@ export default function EmployeeReports() {
   const [cookie, setCookie] = useCookies(["role"]);
   useEffect(
     () => {
-      validateToken(cookie, navigate, setCookie, setWaiting);
+      new Promise<void>((resolve) => {
+        validateToken(cookie, navigate, setCookie, setWaiting);
+        setWaiting(true);
+        resolve();
+      }).then(() => {
+        fetch(
+          `http://localhost:8080/report?userId=${parseInt(queryParameters.get("id")!)}&year=${parseInt(queryParameters.get("year")!)}&month=${parseInt(queryParameters.get("month")!)}`,
+          {
+            credentials: "include",
+          },
+        )
+          .then((response) => {
+            if (response.status !== 200) {
+              if (response.status === 204) {
+                return;
+              }
+              throw Error(
+                "Token logowania przedawnił się lub wystąpił błąd serwera.",
+              );
+            }
+            return response.text();
+          })
+          .then((text) => {
+            if (text === undefined) return;
+            const parsedResponse = JSON.parse(text);
+            setSavedState({ ...parsedResponse });
+            setExtraPay(parsedResponse.extraPay.toString());
+            setCashAdvance(parsedResponse.cashAdvance.toString());
+            setLoanTaken(parsedResponse.loanTaken.toString());
+            setLoanReturned(parsedResponse.loanReturned.toString());
+            setAdditionalCosts(parsedResponse.additionalCosts.toString());
+            setAdditionalCostsDescription(
+              parsedResponse.additionalCostsDescription,
+            );
+            setOtherCosts(parsedResponse.otherCosts.toString());
+            setOtherCostsDescription(parsedResponse.otherCostsDescription);
+            setTax26YearsOld(parsedResponse.tax26yearsOld.toString());
+            setWorkHours(parsedResponse.workHours.toString());
+            setHourlyRate(parsedResponse.hourlyRate.toString());
+            setTransfer(parsedResponse.transfer.toString());
+            setL4Days(parsedResponse.l4Days.toString());
+            setL4DailyRate(parsedResponse.l4DailyRate.toString());
+            setDaysUnpaid(parsedResponse.daysUnpaid.toString());
+            setDaysTaken(parsedResponse.daysTaken.toString());
+            setDaysOnDemand(parsedResponse.daysOnDemand.toString());
+            setDaysOccasional(parsedResponse.daysOccasional.toString());
+            setTimeOffDailyRate(parsedResponse.timeOffDailyRate.toString());
+            setOvertimeHours(parsedResponse.overtimeHours.toString());
+            setOvertimeHourlyRate(parsedResponse.overtimeHourlyRate.toString());
+            setSettlementDate(
+              parsedResponse.settlementDate === null
+                ? null
+                : dayjs(parsedResponse.settlementDate),
+            );
+            setSavedDaysToTake(parsedResponse.daysOffPerYear);
+            setDaysToTake(parsedResponse.daysOffPerYear.toString());
+            // setSavedComments(parsedResponse.);
+            // setComments(parsedResponse.);
+            setWaiting(false);
+          })
+          .catch((error) => {
+            console.error(error);
+            navigate("/signIn");
+            return;
+          });
+      });
     },
     [], // eslint-disable-line
   );
 
   useEffect(() => {
+    let activate;
+    if (settlementDate === null || savedState.settlementDate === null) {
+      activate = settlementDate !== null || savedState.settlementDate !== null;
+    } else {
+      activate = settlementDate.toString() !== dayjs(savedState.settlementDate).toString()
+    }
     setButtonActive(
       detectStateChange(savedState.workHours, workHours) ||
         detectStateChange(savedState.hourlyRate, hourlyRate) ||
@@ -175,9 +246,8 @@ export default function EmployeeReports() {
         savedState.additionalCostsDescription !== additionalCostsDescription ||
         detectStateChange(savedState.otherCosts, otherCosts) ||
         savedState.otherCostsDescription !== otherCostsDescription ||
-        detectStateChange(savedState.tax26YearsOld, tax26YearsOld) ||
-        savedNotes.toString() !== notes.toString() ||
-        settlementDate !== savedState.settlementDate,
+        detectStateChange(savedState.tax26yearsOld, tax26YearsOld) ||
+        savedNotes.toString() !== notes.toString() || activate
     );
   }, [
     savedState,
@@ -313,6 +383,7 @@ export default function EmployeeReports() {
               navigate(
                 `/personnel/report?id=${id}&year=${newValue.year()}&month=${newValue.month() + 1}`,
               );
+              navigate(0);
             }
           }}
           minDate={dayjs(new Date(2020, 1, 1))}
@@ -683,7 +754,7 @@ export default function EmployeeReports() {
                   additionalCostsDescription: additionalCostsDescription,
                   otherCosts: parseFloat(otherCosts),
                   otherCostsDescription: otherCostsDescription,
-                  tax26YearsOld: parseFloat(tax26YearsOld),
+                  tax26yearsOld: parseFloat(tax26YearsOld),
                 });
                 setSavedNotes([...notes]);
                 setSavedDaysToTake(parseInt(daysToTake));

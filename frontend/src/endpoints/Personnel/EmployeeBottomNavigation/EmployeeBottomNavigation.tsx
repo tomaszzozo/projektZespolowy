@@ -4,7 +4,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import FabNavgiation, {
   Action,
 } from "../../../components/FabNavigation/FabNavigation";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Fab } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 import styles from "./styles.module.scss";
@@ -17,6 +17,17 @@ export default function EmployeeBottomNavigation(
   }>,
 ) {
   const navigate = useNavigate();
+  const [queryParameters] = useSearchParams();
+  if (
+    queryParameters.get("id") === null ||
+    parseInt(queryParameters.get("id")!) <= 0
+  ) {
+    console.error(`id ${queryParameters.get("id")} is incorrect`);
+    navigate("/personnel");
+    return;
+  }
+
+  const id = parseInt(queryParameters.get("id")!);
 
   const actions: Action[] = [
     {
@@ -29,13 +40,13 @@ export default function EmployeeBottomNavigation(
       name: "Rozliczenia",
       onClick: () =>
         navigate(
-          `/personnel/report?id=1&year=${new Date().getFullYear()}&month=${new Date().getMonth()}`,
+          `/personnel/report?id=${id}&year=${new Date().getFullYear()}&month=${new Date().getMonth()}`,
         ),
     },
     {
       icon: <PersonIcon />,
       name: "Dane",
-      onClick: () => navigate("/personnel/data?id=1"),
+      onClick: () => navigate(`/personnel/data?id=${id}`),
     },
   ];
 
