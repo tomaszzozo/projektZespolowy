@@ -10,6 +10,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Setter
 @Getter
 @Entity
@@ -41,6 +43,10 @@ public class User {
     private String phone_number;
     @Column(nullable = false)
     private Integer role = 0;
+    @OneToMany(mappedBy = "user")
+    private Set<DaysOffPerYear> daysOffPerYear;
+    @OneToMany(mappedBy = "user")
+    private Set<MonthlyReport> monthlyReports;
 
     public Dto toDto() {
         return new Dto(id, email, first_name, last_name, phone_number, role);

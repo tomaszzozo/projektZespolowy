@@ -29,7 +29,7 @@ CREATE TABLE days_off_per_year
 (
     id            SERIAL PRIMARY KEY,
     yearly_limit  INTEGER,
-    year_of_limit TIMESTAMP NOT NULL,
+    year_of_limit INTEGER NOT NULL,
     user_id       INTEGER   NOT NULL REFERENCES users (id)
 );
 
@@ -37,7 +37,8 @@ CREATE TABLE monthly_reports
 (
     id                           SERIAL PRIMARY KEY,
     user_id                      INTEGER NOT NULL REFERENCES users (id),
-    month_of_report              DATE    NOT NULL,
+    month_of_report              INTEGER NOT NULL,
+    year_of_report               INTEGER NOT NULL,
     settlement_date              DATE,
     work_hours                   INTEGER,
     hourly_rate                  DOUBLE PRECISION,
@@ -75,23 +76,21 @@ CREATE TABLE comments
 
 
 INSERT INTO users (password, email, first_name, last_name, change_password, phone_number, role)
-VALUES
-    ('Admin123#', 'admin@example.com', 'Admin', 'User', false, '1234567890', 1),
-    ('User123#', 'user@example.com', 'Regular', 'User', true, '0987654321', 0);
+VALUES ('Admin123#', 'admin@example.com', 'Admin', 'User', false, '1234567890', 1),
+       ('User123#', 'user@example.com', 'Regular', 'User', true, '0987654321', 0);
 
 INSERT INTO days_off_per_year (yearly_limit, year_of_limit, user_id)
-VALUES (20, '2024-01-01', 2);
+VALUES (20, 2024, 2);
 
-INSERT INTO monthly_reports (
-    user_id, month_of_report, settlement_date, work_hours, hourly_rate, transfer, l4_days, l4_daily_rate,
-    days_off_per_year, days_taken, days_unpaid, days_on_demand, days_occasional, time_off_daily_rate,
-    overtime_hourly_rate, overtime_hours, extra_pay, cash_advance, loanTaken, loanReturned, additional_costs,
-    additional_costs_description, other_costs, other_costs_description, tax_26_years_old
-)
-VALUES (
-           2, '2024-04-01', '2024-04-30', 160, 20.0, 100.0, 2, 15.0, 1, 2, 0, 1, 0, 20.0,
-           25.0, 10, 100.0, 50.0, 500.0, 0.0, 20.0, 'Koszty', 30.0, 'Wydatki', 10.0
-       );
+INSERT INTO monthly_reports (user_id, month_of_report, year_of_report, settlement_date, work_hours, hourly_rate, transfer, l4_days,
+                             l4_daily_rate,
+                             days_off_per_year, days_taken, days_unpaid, days_on_demand, days_occasional,
+                             time_off_daily_rate,
+                             overtime_hourly_rate, overtime_hours, extra_pay, cash_advance, loanTaken, loanReturned,
+                             additional_costs,
+                             additional_costs_description, other_costs, other_costs_description, tax_26_years_old)
+VALUES (2, 4, 2024, '2024-04-30', 160, 20.0, 100.0, 2, 15.0, 1, 2, 0, 1, 0, 20.0,
+        25.0, 10, 100.0, 50.0, 500.0, 0.0, 20.0, 'Koszty', 30.0, 'Wydatki', 10.0);
 
 INSERT INTO comments (report_id, comment_body)
 VALUES (1, 'Komentarz');
